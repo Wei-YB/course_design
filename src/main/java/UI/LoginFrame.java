@@ -123,7 +123,7 @@ public class LoginFrame extends JFrame {
                             System.out.println("Login successfully");
 
                             AppMain.userPrivilege = rs.getInt("privilege");
-                            System.out.println(AppMain.userPrivilege);
+//                            System.out.println(AppMain.userPrivilege);
                             AppMain app = AppMain.getInstance();
                             app.switchFrame();
                             break;

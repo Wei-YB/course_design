@@ -9,7 +9,7 @@ public class DbUtil {
     private ResultSet resultSet = null;
 
 //    private static String DBDriver = "com.mysql.jdbc.Driver";
-//    private static String DBUrl = "jdbc:mysql://127.0.0.1:3306/";
+//    private static String DBUrl = "jdbc:mysql://138.197.217.138:3306/";
     private static String DBDriver = "org.mariadb.jdbc.Driver";
     private static String DBUrl = "jdbc:mariadb://localhost:3306/";
     private static String DBName = "course_design";

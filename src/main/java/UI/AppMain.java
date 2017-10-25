@@ -3,7 +3,6 @@ package main.java.UI;
 
 import main.java.UI.panels.*;
 
-
 import javax.swing.*;
 import java.awt.*;
 
@@ -11,10 +10,10 @@ public class AppMain {
 
     private JFrame frame;
     private JPanel mainPanel;
+    private JPanel mainCenterPanel;
 
     private static AppMain instance;
 
-//    public static JPanel mainCenterPanel;
     public static WelcomePanel welcomePanel;
     public static DatabasePanel dbPanel;
     public static OperatorPanel operatorPanel;
@@ -50,9 +49,9 @@ public class AppMain {
     }
 
     public void switchPanel(JPanel panel) {
-        mainPanel.removeAll();
-        mainPanel.add(panel, BorderLayout.CENTER);
-        mainPanel.updateUI();
+        mainCenterPanel.removeAll();
+        mainCenterPanel.add(panel, BorderLayout.CENTER);
+        mainCenterPanel.updateUI();
     }
 
     private void initMainFrame() {
@@ -76,13 +75,12 @@ public class AppMain {
         optionPanel = new OptionPanel();
 
         mainPanel.add(toolBarPanel, BorderLayout.WEST); //location of toolBarPanel
-        mainPanel.add(welcomePanel, BorderLayout.CENTER);
 
-//        mainCenterPanel = new JPanel(true);
-//        mainCenterPanel.setLayout(new BorderLayout());
-//        mainCenterPanel.add(welcomePanel, BorderLayout.CENTER);
-//
-//        mainPanel.add(mainCenterPanel, BorderLayout.CENTER);
+        mainCenterPanel = new JPanel(true);
+        mainCenterPanel.setLayout(new BorderLayout());
+        mainCenterPanel.add(welcomePanel, BorderLayout.CENTER);
+
+        mainPanel.add(mainCenterPanel, BorderLayout.CENTER);
 
         frame.add(mainPanel);
 

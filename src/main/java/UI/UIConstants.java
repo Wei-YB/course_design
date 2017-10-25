@@ -37,5 +37,10 @@ public class UIConstants {
 
     public static final int SCREEN_HEIGHT = (int) java.awt.Toolkit.getDefaultToolkit().getScreenSize().height;
 
+    /**
+     * Text
+     */
+    public static final String[] TABLE_HEADS = {"id", "username", "password", "privilege"};
+
 
 }
