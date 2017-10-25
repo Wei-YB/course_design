@@ -28,7 +28,14 @@ public class UIConstants {
      * Size
      */
     public static final int TOOL_BAR_WIDTH = 128;
+
     public static final Dimension LABEL_SIZE = new Dimension(78, 30);
+
     public static final  Dimension INPUT_FIELD_SIZE = new Dimension(200, 30);
+
+    public static final int SCREEN_WIDTH = (int) java.awt.Toolkit.getDefaultToolkit().getScreenSize().width;
+
+    public static final int SCREEN_HEIGHT = (int) java.awt.Toolkit.getDefaultToolkit().getScreenSize().height;
+
 
 }

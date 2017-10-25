@@ -64,14 +64,21 @@ public class DbUtil {
         }
     }
 
-    public synchronized ResultSet execQuery(String query) throws SQLException{
+    public synchronized ResultSet execQuery(String sql) throws SQLException {
         getStatement();
         if(resultSet != null && !resultSet.isClosed()) {
             resultSet.close();
         }
         resultSet = null;
-        resultSet = statement.executeQuery(query);
+        resultSet = statement.executeQuery(sql);
         return resultSet;
+    }
+
+    public synchronized int execUpdate(String sql) throws SQLException {
+        int result = 0;
+        getStatement();
+        result = statement.executeUpdate(sql);
+        return result;
     }
 
     private synchronized void getStatement() throws SQLException {
