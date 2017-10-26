@@ -77,14 +77,14 @@ public class OperatorPanel extends JPanel {
         panelItems[2].setLayout(new FlowLayout(FlowLayout.LEFT, 15, 12));
         panelItems[3].setLayout(new GridLayout(2, 3, 12, 12));
 
-        JLabel labelDeviceName = new JLabel("Device Name:     ");
-        JLabel labelDeviceNumber = new JLabel("             Device Number:   ");
+        JLabel labelDeviceName = new JLabel("      Device Name:    ");
+        JLabel labelDeviceNumber = new JLabel("     Device Number:   ");
 
         JTextField inputDeviceName = new JTextField();
         JTextField inputDeviceNumber = new JTextField();
 
-        inputDeviceName.setPreferredSize(new Dimension(100, 30));
-        inputDeviceNumber.setPreferredSize(new Dimension(100, 30));
+        inputDeviceName.setPreferredSize(new Dimension(125, 30));
+        inputDeviceNumber.setPreferredSize(new Dimension(125, 30));
 
         inputDeviceNumber.setDocument(new RegExpForTextField("^(([1-9])|([1-9][0-9]))$"));
         inputDeviceNumber.setHorizontalAlignment(JTextField.CENTER);
