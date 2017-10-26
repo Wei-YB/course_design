@@ -9,8 +9,6 @@ public class UIConstants {
 
     public static final String APP_VERSION = "1.0";
 
-    public static final Rectangle APP_BOUNDS = new Rectangle(200, 100, 900, 600);
-
     /**
      * Color
      */
@@ -21,8 +19,11 @@ public class UIConstants {
     /**
      * Icon
      */
-    public static final ImageIcon ICON_A = new ImageIcon(
-            AppMain.class.getResource("/icon/a.png"));
+    public static final ImageIcon ICON_DATABASE = new ImageIcon(
+            AppMain.class.getResource("/icon/database.png"));
+
+    public static final ImageIcon ICON_OPERATOR = new ImageIcon(
+            AppMain.class.getResource("/icon/operator.png"));
 
     /**
      * Size
@@ -31,11 +32,13 @@ public class UIConstants {
 
     public static final Dimension LABEL_SIZE = new Dimension(78, 30);
 
-    public static final  Dimension INPUT_FIELD_SIZE = new Dimension(200, 30);
-
     public static final int SCREEN_WIDTH = (int) java.awt.Toolkit.getDefaultToolkit().getScreenSize().width;
 
     public static final int SCREEN_HEIGHT = (int) java.awt.Toolkit.getDefaultToolkit().getScreenSize().height;
+
+    public static final Rectangle APP_BOUNDS = new Rectangle(
+            (SCREEN_WIDTH - 1100) / 2, (SCREEN_HEIGHT - 700) / 2,
+            1100, 700);
 
     /**
      * Text

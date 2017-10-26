@@ -5,15 +5,20 @@ import main.java.UI.UIConstants;
 
 import javax.swing.*;
 import java.awt.*;
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.sql.*;
+import java.util.Arrays;
+import java.util.Vector;
 
 public class DatabasePanel extends JPanel{
 
     public static JTable dbTable;
 
-    private static Object[][] dbDatas;
+    private static Vector<Vector<Object>> dbDatas;
+    private static Vector<String> dbHeads;
+
+    private JButton btnPrint;
 
     public DatabasePanel() {
         init();
@@ -25,19 +30,26 @@ public class DatabasePanel extends JPanel{
     private void init() {
         this.setBackground(UIConstants.MAIN_COLOR);
         this.setLayout(new BorderLayout());
+
+        dbDatas = new Vector<>();
+        dbHeads = new Vector<>();
+
+        dbHeads.addAll(Arrays.asList(UIConstants.TABLE_HEADS));
     }
 
     private void addComponent() {
         this.add(upperPanel(), BorderLayout.NORTH);
         this.add(midPanel(), BorderLayout.CENTER);
+        this.add(lowerPanel(), BorderLayout.SOUTH);
     }
 
     private JPanel upperPanel() {
         JPanel panel = new JPanel();
         panel.setBackground(UIConstants.MAIN_COLOR);
-        panel.setLayout(new FlowLayout(FlowLayout.LEFT, 25, 5));
+        panel.setLayout(new FlowLayout(FlowLayout.LEFT, 10, 10));
 
-        JLabel title = new JLabel("......");
+        JLabel title = new JLabel("Database Panel");
+        title.setFont(new Font("font", Font.BOLD, 20));
         panel.add(title);
 
         return panel;
@@ -53,16 +65,32 @@ public class DatabasePanel extends JPanel{
         return panel;
     }
 
+    private JPanel lowerPanel() {
+        JPanel panel = new JPanel();
+        panel.setBackground(UIConstants.MAIN_COLOR);
+        panel.setLayout(new FlowLayout(FlowLayout.RIGHT, 25, 5));
+
+        btnPrint = new JButton("print");
+        panel.add(btnPrint);
+        return panel;
+    }
+
     private JPanel dbPanel() {
         JPanel panel = new JPanel();
         panel.setBackground(UIConstants.MAIN_COLOR);
         panel.setLayout(new BorderLayout());
 
-        dbTable = new JTable(dbDatas, UIConstants.TABLE_HEADS);
-        dbTable.getTableHeader().setBackground(UIConstants.TOOL_BAR_COLOR);
+        dbTable = new JTable(dbDatas, dbHeads) {
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                return false;
+            }
+        };
+        dbTable.getTableHeader().setBackground(new Color(37, 157, 221));
+        dbTable.getTableHeader().setFont(new Font("font", Font.LAYOUT_LEFT_TO_RIGHT, 14));
         dbTable.setRowHeight(30);
         dbTable.setGridColor(new Color(229, 229, 229));
-        dbTable.setSelectionBackground(UIConstants.TOOL_BAR_COLOR);
+        dbTable.setSelectionBackground(Color.LIGHT_GRAY);
 
         dbTable.getColumnModel().getColumn(0).setPreferredWidth(50);
         dbTable.getColumnModel().getColumn(0).setMaxWidth(50);
@@ -81,19 +109,16 @@ public class DatabasePanel extends JPanel{
             Connection conn = dbMySQL.getConnection();
 
             ResultSet rs = dbMySQL.execQuery("SELECT * FROM users;");
-            int columns = rs.getMetaData().getColumnCount();
-            dbDatas = new Object[columns][4];
-//            System.out.println(columns);
+            ResultSetMetaData rsmd = rs.getMetaData();
 
-            for (int i = 1; i < columns; i++) {
-                rs.next();
-                dbDatas[i] = new Object[] {
-                        rs.getInt("id"),
-                        rs.getString("username"),
-                        rs.getString("password"),
-                        rs.getInt("privilege")
-                };
-//                    System.out.println(i);
+            while (rs.next()) {
+                Vector<Object> obj = new Vector<>();
+                obj.add(rs.getInt("id"));
+                obj.add(rs.getString("username"));
+                obj.add(rs.getString("password"));
+                obj.add(rs.getInt("privilege"));
+
+                dbDatas.add(obj);
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -101,6 +126,11 @@ public class DatabasePanel extends JPanel{
     }
 
     private void addListener() {
+        btnPrint.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
 
+            }
+        });
     }
 }

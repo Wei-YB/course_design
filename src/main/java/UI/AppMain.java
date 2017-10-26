@@ -24,7 +24,8 @@ public class AppMain {
     public static int userPrivilege;
 
     private AppMain() {
-        initLoginFrame();
+//        initLoginFrame();
+        initMainFrame();
     }
 
     public static AppMain getInstance() {
@@ -52,12 +53,14 @@ public class AppMain {
         mainCenterPanel.removeAll();
         mainCenterPanel.add(panel, BorderLayout.CENTER);
         mainCenterPanel.updateUI();
+        frame.setResizable(false);
     }
 
     private void initMainFrame() {
         frame = null;
         frame = new JFrame();
 
+        frame.setResizable(false);
         frame.setBounds(UIConstants.APP_BOUNDS);
         frame.setTitle(UIConstants.APP_NAME);
         frame.setBackground(UIConstants.MAIN_COLOR);

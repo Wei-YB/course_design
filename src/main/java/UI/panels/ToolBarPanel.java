@@ -12,7 +12,7 @@ import java.awt.event.ActionListener;
 public class ToolBarPanel extends JPanel {
 
     private static IconButton btnDb;
-    private static IconButton btnB;
+    private static IconButton btnOperator;
     private static IconButton btnC;
 
     public ToolBarPanel() {
@@ -42,27 +42,35 @@ public class ToolBarPanel extends JPanel {
         panelDown.setLayout(new BorderLayout(0, 0));
 
         btnDb = new IconButton(
-                UIConstants.ICON_A,
-                UIConstants.ICON_A,
-                UIConstants.ICON_A,
-                "database",
-                "buttonA");
+                UIConstants.ICON_DATABASE,
+                UIConstants.ICON_DATABASE,
+                UIConstants.ICON_DATABASE,
+                "Database",
+                "show database");
+
+        btnOperator = new IconButton(
+                UIConstants.ICON_OPERATOR,
+                UIConstants.ICON_OPERATOR,
+                UIConstants.ICON_OPERATOR,
+                "Operator",
+                "add/edit any devices");
 
         panelUp.add(btnDb);
+        panelUp.add(btnOperator);
 
         this.add(panelUp);
         this.add(panelDown);
     }
 
     private void addListener() {
-        btnDb.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
+        btnDb.addActionListener((e)-> {
+            AppMain app = AppMain.getInstance();
+            app.switchPanel(AppMain.dbPanel);
+        });
 
-                AppMain app = AppMain.getInstance();
-                app.switchPanel(AppMain.dbPanel);
-            }
+        btnOperator.addActionListener((e)-> {
+            AppMain app = AppMain.getInstance();
+            app.switchPanel(AppMain.operatorPanel);
         });
     }
-
 }

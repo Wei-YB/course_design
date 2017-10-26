@@ -10,7 +10,7 @@ public class IconButton extends JButton {
 
     public IconButton(ImageIcon iconNormal, ImageIcon iconActivated, ImageIcon iconUnactivated,
                       String text, String tips) {
-        super(text, iconNormal);
+        super(iconNormal);
 
         this.iconActivated = iconActivated;
         this.iconUnactivated = iconUnactivated;
@@ -20,6 +20,8 @@ public class IconButton extends JButton {
         this.setContentAreaFilled(false);
         this.setFocusable(true);
         this.setMargin(new Insets(0, 0, 0, 0));
+        this.setText(text);
+        this.setFont(new Font("font", Font.BOLD, 12));
 
         this.setRolloverIcon(iconActivated);
         this.setPressedIcon(iconActivated);
