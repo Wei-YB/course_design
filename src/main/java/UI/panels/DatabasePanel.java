@@ -4,19 +4,25 @@ import main.java.Tools.DbUtil;
 import main.java.UI.UIConstants;
 
 import javax.swing.*;
+import javax.swing.table.JTableHeader;
+import javax.swing.table.TableColumn;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.*;
 import java.util.Arrays;
+import java.util.Enumeration;
+import java.util.HashMap;
 import java.util.Vector;
 
-public class DatabasePanel extends JPanel{
+public class DatabasePanel extends JPanel {
 
     public static JTable dbTable;
 
     private static Vector<Vector<Object>> dbDatas;
     private static Vector<String> dbHeads;
+
+    private static DbUtil dbMySQL;
 
     private JButton btnPrint;
 
@@ -25,6 +31,12 @@ public class DatabasePanel extends JPanel{
         initDbData();
         addComponent();
         addListener();
+        try {
+            dbMySQL.closeConnection();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
     }
 
     private void init() {
@@ -33,8 +45,6 @@ public class DatabasePanel extends JPanel{
 
         dbDatas = new Vector<>();
         dbHeads = new Vector<>();
-
-        dbHeads.addAll(Arrays.asList(UIConstants.TABLE_HEADS));
     }
 
     private void addComponent() {
@@ -58,7 +68,7 @@ public class DatabasePanel extends JPanel{
     private JPanel midPanel() {
         JPanel panel = new JPanel();
         panel.setBackground(UIConstants.MAIN_COLOR);
-        panel.setLayout(new GridLayout(1, 1));
+        panel.setLayout(new BorderLayout());
 
         panel.add(dbPanel());
 
@@ -86,14 +96,18 @@ public class DatabasePanel extends JPanel{
                 return false;
             }
         };
+        dbTable.getTableHeader().setReorderingAllowed(false);
         dbTable.getTableHeader().setBackground(new Color(37, 157, 221));
-        dbTable.getTableHeader().setFont(new Font("font", Font.LAYOUT_LEFT_TO_RIGHT, 14));
+        dbTable.getTableHeader().setFont(new Font("font", Font.PLAIN, 14));
         dbTable.setRowHeight(30);
         dbTable.setGridColor(new Color(229, 229, 229));
         dbTable.setSelectionBackground(Color.LIGHT_GRAY);
 
-        dbTable.getColumnModel().getColumn(0).setPreferredWidth(50);
-        dbTable.getColumnModel().getColumn(0).setMaxWidth(50);
+//        for (int i = 0; i < dbTable.getColumnCount(); i++) {
+//            dbTable.getColumnModel().getColumn(i).setPreferredWidth(50);
+//            dbTable.getColumnModel().getColumn(i).setMaxWidth(100);
+//        }
+        FitTableColumns(dbTable);
 
         JScrollPane scrollPane = new JScrollPane(dbTable);
         scrollPane.setBackground(UIConstants.MAIN_COLOR);
@@ -103,21 +117,50 @@ public class DatabasePanel extends JPanel{
         return panel;
     }
 
+    private void FitTableColumns(JTable myTable) {
+        JTableHeader header = myTable.getTableHeader();
+        int rowCount = myTable.getRowCount();
+
+        Enumeration columns = myTable.getColumnModel().getColumns();
+
+        while (columns.hasMoreElements()) {
+            TableColumn column = (TableColumn) columns.nextElement();
+
+            int col = header.getColumnModel().getColumnIndex(column.getIdentifier());
+            int width = (int) myTable.getTableHeader().getDefaultRenderer()
+                    .getTableCellRendererComponent(myTable, column.getIdentifier(),
+                            false, false, -1, col).getPreferredSize().getWidth();
+
+            for (int row = 0; row < rowCount; row++) {
+                int preferedWidth = (int) myTable.getCellRenderer(row, col).getTableCellRendererComponent(myTable,
+                        myTable.getValueAt(row, col),
+                        false, false,
+                        row, col).getPreferredSize().getWidth();
+                width = Math.max(width, preferedWidth);
+            }
+
+            header.setResizingColumn(column);
+            column.setWidth((int) ((width + myTable.getIntercellSpacing().width) * 1.85f));
+        }
+    }
+
     private static void initDbData() {
         try {
-            DbUtil dbMySQL = DbUtil.getInstance();
+            dbMySQL = DbUtil.getInstance();
             Connection conn = dbMySQL.getConnection();
 
-            ResultSet rs = dbMySQL.execQuery("SELECT * FROM users;");
+            ResultSet rs = dbMySQL.execQuery("SELECT * FROM T;");
             ResultSetMetaData rsmd = rs.getMetaData();
+
+            for (int i = 1; i <= rsmd.getColumnCount(); i++) {
+                dbHeads.add(rsmd.getColumnName(i));
+            }
 
             while (rs.next()) {
                 Vector<Object> obj = new Vector<>();
-                obj.add(rs.getInt("id"));
-                obj.add(rs.getString("username"));
-                obj.add(rs.getString("password"));
-                obj.add(rs.getInt("privilege"));
-
+                for (int i = 1; i <= rsmd.getColumnCount(); i++) {
+                    obj.add(rs.getObject(i));
+                }
                 dbDatas.add(obj);
             }
         } catch (SQLException e) {
@@ -126,11 +169,8 @@ public class DatabasePanel extends JPanel{
     }
 
     private void addListener() {
-        btnPrint.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
+        btnPrint.addActionListener((e) -> {
 
-            }
         });
     }
 }

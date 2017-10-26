@@ -1,9 +1,12 @@
 package main.java.UI.panels;
 
+import main.java.Tools.RegExpForTextField;
 import main.java.UI.UIConstants;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.FocusAdapter;
+import java.awt.event.FocusEvent;
 
 public class OperatorPanel extends JPanel {
 
@@ -51,7 +54,7 @@ public class OperatorPanel extends JPanel {
         panelMain.setLayout(new BorderLayout());
 
         panelNorth.setBackground(UIConstants.MAIN_COLOR);
-        panelNorth.setLayout(new GridLayout(1, 2));
+        panelNorth.setLayout(new GridLayout(1, 2, 0, 15));
 
         btnAddDevice = new JButton("Add Device");
         btnEditDevice = new JButton("Edit Device");
@@ -69,54 +72,96 @@ public class OperatorPanel extends JPanel {
 //        panelItems[3] = new JPanel();
 //        panelItems[3].setBackground(UIConstants.MAIN_COLOR);
 
-        panelItems[0].setLayout(new FlowLayout(FlowLayout.CENTER, 20, 10));
-        panelItems[1].setLayout(new FlowLayout(FlowLayout.LEFT, 20, 10));
-        panelItems[2].setLayout(new FlowLayout(FlowLayout.LEFT, 20, 15));
+        panelItems[0].setLayout(new FlowLayout(FlowLayout.CENTER, 22, 13));
+        panelItems[1].setLayout(new FlowLayout(FlowLayout.LEFT, 15, 12));
+        panelItems[2].setLayout(new FlowLayout(FlowLayout.LEFT, 15, 12));
         panelItems[3].setLayout(new GridLayout(2, 3, 12, 12));
 
-
-        JLabel labelDeviceName = new JLabel("  Device Name:     ");
-        JLabel labelDeviceNumber = new JLabel("  Device Number:      ");
+        JLabel labelDeviceName = new JLabel("Device Name:     ");
+        JLabel labelDeviceNumber = new JLabel("             Device Number:   ");
 
         JTextField inputDeviceName = new JTextField();
         JTextField inputDeviceNumber = new JTextField();
 
-        inputDeviceName.setPreferredSize(new Dimension(100, 35));
-        inputDeviceNumber.setPreferredSize(new Dimension(70, 35));
+        inputDeviceName.setPreferredSize(new Dimension(100, 30));
+        inputDeviceNumber.setPreferredSize(new Dimension(100, 30));
+
+        inputDeviceNumber.setDocument(new RegExpForTextField("^(([1-9])|([1-9][0-9]))$"));
+        inputDeviceNumber.setHorizontalAlignment(JTextField.CENTER);
 
         panelItems[0].add(labelDeviceName);
         panelItems[0].add(inputDeviceName);
         panelItems[0].add(labelDeviceNumber);
         panelItems[0].add(inputDeviceNumber);
 
-        JLabel labelShaftEfficiency = new JLabel("   Shaft Efficiency: ");
-        JLabel labelGeneratorPower = new JLabel("  Generator Power:  ");
+        JLabel labelShaftPower = new JLabel("      Shaft Power:       ");
+        JLabel labelGeneratorPower = new JLabel("      Generator Power:  ");
         JLabel labelGeneratorEfficiency = new JLabel("Generator Efficiency:");
         JLabel labelUtilizationFactor = new JLabel("Utilization Factor K1:");
         JLabel labelGeneratorRevSpeed = new JLabel("Generator Rev Speed:");
 
-        JTextField inputShaftEfficiency = new JTextField();
+        JLabel labelSPUnit = new JLabel("kW");
+        JLabel labelGPUnit = new JLabel("kW");
+        JLabel labelGEUnit = new JLabel("%");
+        JLabel labelGRSUnit = new JLabel("rpm");
+
+        labelSPUnit.setFont(new Font("font", Font.ITALIC, 15));
+        labelGPUnit.setFont(new Font("font", Font.ITALIC, 15));
+        labelGEUnit.setFont(new Font("font", Font.ITALIC, 15));
+        labelGRSUnit.setFont(new Font("font", Font.ITALIC, 15));
+
+        JTextField inputShaftPower = new JTextField();
         JTextField inputGeneratorPower = new JTextField();
         JTextField inputGeneratorEfficiency = new JTextField();
         JTextField inputUtilizationFactor = new JTextField();
         JTextField inputGeneratorRevSpeed = new JTextField();
 
-        inputShaftEfficiency.setPreferredSize(new Dimension(100, 35));
-        inputGeneratorPower.setPreferredSize(new Dimension(70, 35));
-        inputGeneratorEfficiency.setPreferredSize(new Dimension(70, 35));
-        inputUtilizationFactor.setPreferredSize(new Dimension(70, 35));
-        inputGeneratorRevSpeed.setPreferredSize(new Dimension(70, 35));
+        inputShaftPower.setPreferredSize(new Dimension(90, 30));
+        inputGeneratorPower.setPreferredSize(new Dimension(90, 30));
+        inputGeneratorEfficiency.setPreferredSize(new Dimension(60, 30));
+        inputUtilizationFactor.setPreferredSize(new Dimension(70, 30));
+        inputGeneratorRevSpeed.setPreferredSize(new Dimension(60, 30));
 
-        panelItems[1].add(labelShaftEfficiency);
-        panelItems[1].add(inputShaftEfficiency);
+        inputShaftPower.setDocument(new RegExpForTextField("^(([1-9])|([1-9][0-9]))$"));
+        inputGeneratorPower.setDocument(new RegExpForTextField("^(([1-9])|([1-9][0-9]))$"));
+        inputGeneratorEfficiency.setDocument(new RegExpForTextField("^(([1-9])|([1-9][0-9])|(100))$"));
+        inputUtilizationFactor.setDocument(new RegExpForTextField(
+                "^((1)|(0)|(0\\.)|(0\\.[0-9])|(0\\.[0-9][1-9])|(0\\.[1-9][0-9]))$"));
+        inputGeneratorRevSpeed.setDocument(new RegExpForTextField(
+                "^(([1-9])|([1-9][0-9])|([1-9][0-9][0-9]|([1-2][0-9][0-9][0-9])|(3000)))$"));
+
+        inputShaftPower.setHorizontalAlignment(JTextField.CENTER);
+        inputGeneratorPower.setHorizontalAlignment(JTextField.CENTER);
+        inputGeneratorEfficiency.setHorizontalAlignment(JTextField.CENTER);
+        inputUtilizationFactor.setHorizontalAlignment(JTextField.CENTER);
+        inputGeneratorRevSpeed.setHorizontalAlignment(JTextField.CENTER);
+
+        inputUtilizationFactor.addFocusListener(new FocusAdapter() {
+            @Override
+            public void focusLost(FocusEvent e) {
+                ifInputValueInvalid(inputUtilizationFactor.getText());
+                inputUtilizationFactor.setText("");
+            }
+        });
+
+        panelItems[1].add(labelShaftPower);
+        panelItems[1].add(inputShaftPower);
+        panelItems[1].add(labelSPUnit);
+
         panelItems[1].add(labelGeneratorPower);
         panelItems[1].add(inputGeneratorPower);
+        panelItems[1].add(labelGPUnit);
+
         panelItems[2].add(labelGeneratorEfficiency);
         panelItems[2].add(inputGeneratorEfficiency);
-        panelItems[2].add(labelUtilizationFactor);
-        panelItems[2].add(inputUtilizationFactor);
+        panelItems[2].add(labelGEUnit);
+
         panelItems[2].add(labelGeneratorRevSpeed);
         panelItems[2].add(inputGeneratorRevSpeed);
+        panelItems[2].add(labelGRSUnit);
+
+        panelItems[2].add(labelUtilizationFactor);
+        panelItems[2].add(inputUtilizationFactor);
 
         panelItems[3].add(statusPanel("Navigating"));
         panelItems[3].add(statusPanel("Weighing"));
@@ -161,6 +206,30 @@ public class OperatorPanel extends JPanel {
         inputMachineLoadFactorK2.setPreferredSize(new Dimension(60, 30));
         inputGeneratorLoadFactorK3.setPreferredSize(new Dimension(60, 30));
 
+        inputMachineLoadFactorK2.setDocument(new RegExpForTextField(
+                "^((1)|(0)|(0\\.)|(0\\.[0-9])|(0\\.[0-9][1-9])|(0\\.[1-9][0-9]))$"));
+        inputGeneratorLoadFactorK3.setDocument(new RegExpForTextField(
+                "^((1)|(0)|(0\\.)|(0\\.[0-9])|(0\\.[0-9][1-9])|(0\\.[1-9][0-9]))$"));
+
+        inputMachineLoadFactorK2.addFocusListener(new FocusAdapter() {
+            @Override
+            public void focusLost(FocusEvent e) {
+                ifInputValueInvalid(inputMachineLoadFactorK2.getText());
+                inputMachineLoadFactorK2.setText("");
+            }
+        });
+
+        inputGeneratorLoadFactorK3.addFocusListener(new FocusAdapter() {
+            @Override
+            public void focusLost(FocusEvent e) {
+                ifInputValueInvalid(inputGeneratorLoadFactorK3.getText());
+                inputGeneratorLoadFactorK3.setText("");
+            }
+        });
+
+        inputMachineLoadFactorK2.setHorizontalAlignment(JTextField.CENTER);
+        inputGeneratorLoadFactorK3.setHorizontalAlignment(JTextField.CENTER);
+
         JComboBox<String> comboBoxLoadType = new JComboBox<>();
         comboBoxLoadType.addItem(" I      ");
         comboBoxLoadType.addItem(" II     ");
@@ -179,6 +248,17 @@ public class OperatorPanel extends JPanel {
         }
 
         return panel;
+    }
+
+    private void ifInputValueInvalid(String text) {
+        if (text.equals("0.") || text.equals("0.0")) {
+            System.out.println("Invalid value");
+            JOptionPane.showMessageDialog(
+                    null,
+                    "invalid value",
+                    "Error Message",
+                    JOptionPane.ERROR_MESSAGE);
+        }
     }
 
     private void addListener() {

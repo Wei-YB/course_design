@@ -1,6 +1,7 @@
 package main.java.UI;
 
 import main.java.Tools.DbUtil;
+import main.java.Tools.RegExpForTextField;
 
 import javax.swing.*;
 import java.awt.*;
@@ -68,6 +69,9 @@ public class LoginFrame extends JFrame {
         inputUid.setPreferredSize(new Dimension(135, 27));
         inputPwd.setPreferredSize(new Dimension(135, 27));
 
+        inputUid.setDocument(new RegExpForTextField("[a-zA-Z0-9]{1,16}"));
+        inputPwd.setDocument(new RegExpForTextField(".{1,16}"));
+
         panelInput.add(labelUid);
         panelInput.add(inputUid);
         panelInput.add(labelPwd);
@@ -89,10 +93,13 @@ public class LoginFrame extends JFrame {
                 ResultSet rs = dbMySQL.execQuery("SELECT * FROM users;");
                 int loginFlag = 0;
 
-                while(rs.next()) {
-                    if(inputUid.getText().equals("")) {
+                while (rs.next()) {
+                    if (inputUid.getText().equals("")) {
                         loginFlag = -1;
-                    } else if(inputPwd.getText().equals("")) {
+                    } else if (inputUid.getText().length() < 6) {
+                        loginFlag = -11;
+                    }
+                    else if (String.valueOf(inputPwd.getPassword()).equals("")) {
                         loginFlag = -2;
                     } else if (rs.getString("username").equals(inputUid.getText())
                             &&
@@ -112,6 +119,14 @@ public class LoginFrame extends JFrame {
                         JOptionPane.showMessageDialog(
                                 null,
                                 "Username blank empty",
+                                "Error Message",
+                                JOptionPane.ERROR_MESSAGE);
+                        break;
+                    case -11:
+                        System.out.println("Username length less than 6");
+                        JOptionPane.showMessageDialog(
+                                null,
+                                "Username length less than 6",
                                 "Error Message",
                                 JOptionPane.ERROR_MESSAGE);
                         break;
@@ -148,6 +163,8 @@ public class LoginFrame extends JFrame {
                                 JOptionPane.ERROR_MESSAGE);
                         break;
                 }
+
+                dbMySQL.closeConnection();
 
             } catch (Exception exception) {
                 exception.printStackTrace();
