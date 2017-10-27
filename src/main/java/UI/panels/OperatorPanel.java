@@ -1,5 +1,6 @@
 package main.java.UI.panels;
 
+import main.java.Logic.Operator;
 import main.java.Tools.RegExpForTextField;
 import main.java.UI.IconButton;
 import main.java.UI.UIConstants;
@@ -13,6 +14,19 @@ public class OperatorPanel extends JPanel {
 
     private IconButton btnAddDevice;
     private IconButton btnEditDevice;
+
+    private JTextField inputDeviceName;
+    private JTextField inputDeviceNumber;
+
+    private JTextField inputShaftPower;
+    private JTextField inputGeneratorPower;
+    private JTextField inputGeneratorEfficiency;
+    private JTextField inputUtilizationFactor;
+    private JTextField inputGeneratorRevSpeed;
+
+    private JPanel[] panelItems;    //TextFields in [1](K0) and [2](K2)
+                                    //ComboBox in [3]
+
 
     public OperatorPanel() {
         init();
@@ -85,8 +99,8 @@ public class OperatorPanel extends JPanel {
         JLabel labelDeviceName = new JLabel("      Device Name:    ");
         JLabel labelDeviceNumber = new JLabel("     Device Number:   ");
 
-        JTextField inputDeviceName = new JTextField();
-        JTextField inputDeviceNumber = new JTextField();
+        inputDeviceName = new JTextField();
+        inputDeviceNumber = new JTextField();
 
         inputDeviceName.setPreferredSize(new Dimension(125, 30));
         inputDeviceNumber.setPreferredSize(new Dimension(125, 30));
@@ -115,11 +129,11 @@ public class OperatorPanel extends JPanel {
         labelGEUnit.setFont(new Font("font", Font.ITALIC, 15));
         labelGRSUnit.setFont(new Font("font", Font.ITALIC, 15));
 
-        JTextField inputShaftPower = new JTextField();
-        JTextField inputGeneratorPower = new JTextField();
-        JTextField inputGeneratorEfficiency = new JTextField();
-        JTextField inputUtilizationFactor = new JTextField();
-        JTextField inputGeneratorRevSpeed = new JTextField();
+        inputShaftPower = new JTextField();
+        inputGeneratorPower = new JTextField();
+        inputGeneratorEfficiency = new JTextField();
+        inputUtilizationFactor = new JTextField();
+        inputGeneratorRevSpeed = new JTextField();
 
         inputShaftPower.setPreferredSize(new Dimension(90, 30));
         inputGeneratorPower.setPreferredSize(new Dimension(90, 30));
@@ -187,7 +201,7 @@ public class OperatorPanel extends JPanel {
     private JPanel statusPanel(String statusName) {
         JPanel panel = new JPanel();
 
-        JPanel[] panelItems = new JPanel[4];
+        panelItems = new JPanel[4];
 
         panel.setBackground(UIConstants.MAIN_COLOR);
         panel.setLayout(new GridLayout(4, 1));
@@ -268,5 +282,12 @@ public class OperatorPanel extends JPanel {
 
     private void addListener() {
 
+        btnAddDevice.addActionListener((e -> {
+            Operator operator = new Operator();
+        }));
+
+        btnEditDevice.addActionListener((e -> {
+
+        }));
     }
 }

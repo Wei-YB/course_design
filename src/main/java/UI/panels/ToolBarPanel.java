@@ -163,4 +163,25 @@ public class ToolBarPanel extends JPanel {
             app.switchPanel(AppMain.aboutPanel);
         });
     }
+
+    public IconButton getButton(String target) {
+        switch (target) {
+            case "Database":
+                return btnDb;
+            case "Operator":
+                return btnOperator;
+            case "Result":
+                return btnResult;
+            case "Logger":
+                return btnLogger;
+            case "About":
+                return btnAbout;
+            default:
+                return null;
+        }
+    }
+
+    public void setCurActivatedBtn(IconButton target) {
+        curActivatedBtn = target;
+    }
 }

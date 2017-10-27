@@ -1,6 +1,7 @@
 package main.java.UI.panels;
 
 import main.java.Tools.DbUtil;
+import main.java.UI.AppMain;
 import main.java.UI.IconButton;
 import main.java.UI.UIConstants;
 import main.java.UI.Utils.ColumnGroup;
@@ -14,6 +15,8 @@ import javax.swing.table.TableColumnModel;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.sql.*;
 import java.util.Arrays;
 import java.util.Enumeration;
@@ -252,6 +255,26 @@ public class DatabasePanel extends JPanel {
     private void addListener() {
         btnPrint.addActionListener((e) -> {
 
+        });
+
+        dbTable.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                if (e.getClickCount() == 2) {
+                    AppMain.toolBarPanel.getButton("Database")
+                            .getParent().setBackground(UIConstants.TOOL_BAR_COLOR);
+
+                    AppMain.toolBarPanel.getButton("Operator")
+                            .getParent().setBackground(UIConstants.TOOL_BAR_ACTIVATED_COLOR);
+
+                    AppMain.toolBarPanel.setCurActivatedBtn(AppMain.toolBarPanel.getButton("Operator"));
+
+                    int row = ((JTable)e.getSource()).rowAtPoint(e.getPoint());
+
+                    AppMain app = AppMain.getInstance();
+                    app.switchPanel(AppMain.operatorPanel);
+                } else { return; }
+            }
         });
     }
 }

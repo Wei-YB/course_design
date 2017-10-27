@@ -21,6 +21,8 @@ public class AppMain {
     public static LogPanel logPanel;
     public static AboutPanel aboutPanel;
 
+    public static ToolBarPanel toolBarPanel;
+
     public static int userPrivilege;
 
     private AppMain() {
@@ -69,7 +71,7 @@ public class AppMain {
         mainPanel.setBackground(Color.WHITE);
         mainPanel.setLayout(new BorderLayout());
 
-        ToolBarPanel toolBarPanel = new ToolBarPanel();
+        toolBarPanel = new ToolBarPanel();
         welcomePanel = new WelcomePanel();
         dbPanel = new DatabasePanel();
         operatorPanel = new OperatorPanel();
