@@ -19,7 +19,7 @@ public class AppMain {
     public static OperatorPanel operatorPanel;
     public static ResultPanel resultPanel;
     public static LogPanel logPanel;
-    public static OptionPanel optionPanel;
+    public static AboutPanel aboutPanel;
 
     public static int userPrivilege;
 
@@ -62,7 +62,7 @@ public class AppMain {
 
         frame.setResizable(false);
         frame.setBounds(UIConstants.APP_BOUNDS);
-        frame.setTitle(UIConstants.APP_NAME);
+        frame.setTitle(UIConstants.APP_NAME + "   " + UIConstants.APP_VERSION);
         frame.setBackground(UIConstants.MAIN_COLOR);
 
         mainPanel = new JPanel(true);
@@ -75,7 +75,7 @@ public class AppMain {
         operatorPanel = new OperatorPanel();
         resultPanel = new ResultPanel();
         logPanel = new LogPanel();
-        optionPanel = new OptionPanel();
+        aboutPanel = new AboutPanel();
 
         mainPanel.add(toolBarPanel, BorderLayout.WEST); //location of toolBarPanel
 
