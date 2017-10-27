@@ -14,6 +14,10 @@ public class UIConstants {
      */
     public static final Color MAIN_COLOR = Color.WHITE;
 
+    public static final Color SUB_COLOR = Color.lightGray;
+
+    public static final Color SSUB_COLOR = new Color(229, 229, 229);
+
     public static final Color TOOL_BAR_COLOR = new Color(11, 209, 189);
 
     public static final Color TOOL_BAR_ACTIVATED_COLOR = new Color(14, 139, 124);
@@ -21,6 +25,7 @@ public class UIConstants {
     /**
      * Icon
      */
+    //Panels
     public static final ImageIcon ICON_DATABASE = new ImageIcon(
             AppMain.class.getResource("/icon/panel/database.png"));
 
@@ -36,6 +41,24 @@ public class UIConstants {
     public static final ImageIcon ICON_ABOUT = new ImageIcon(
             AppMain.class.getResource("/icon/panel/about.png"));
 
+    //Others
+    public static final ImageIcon ICON_PRINT = new ImageIcon(
+            AppMain.class.getResource("/icon/print.png"));
+
+    public static final ImageIcon ICON_OPERATOR_ADD = new ImageIcon(
+            AppMain.class.getResource("/icon/add.png"));
+
+    public static final ImageIcon ICON_OPERATOR_EDIT = new ImageIcon(
+            AppMain.class.getResource("/icon/edit.png"));
+
+    public static final ImageIcon ICON_LOGIN_USER = new ImageIcon(
+            AppMain.class.getResource("/icon/user.png"));
+
+    public static final ImageIcon ICON_LOGIN_PASSWORD = new ImageIcon(
+            AppMain.class.getResource("/icon/password.png"));
+
+    public static final ImageIcon ICON_LOGIN_LOGIN = new ImageIcon(
+            AppMain.class.getResource("/icon/login.png"));
     /**
      * Size
      */

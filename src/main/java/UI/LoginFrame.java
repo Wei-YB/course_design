@@ -14,7 +14,7 @@ public class LoginFrame extends JFrame {
 
     private JTextField inputUid;
     private JPasswordField inputPwd;
-    private JButton btnLogin;
+    private IconButton btnLogin;
 
     public LoginFrame() {
         init();
@@ -24,7 +24,7 @@ public class LoginFrame extends JFrame {
 
     private void init() {
 
-        this.setBackground(UIConstants.MAIN_COLOR);
+        this.setBackground(UIConstants.SUB_COLOR);
         this.setTitle("Login System");
         this.setLayout(new BorderLayout());
         this.setBounds(UIConstants.SCREEN_WIDTH / 2 - 150, UIConstants.SCREEN_HEIGHT / 2 - 125, 300, 250);
@@ -39,7 +39,7 @@ public class LoginFrame extends JFrame {
     private JPanel upperPanel() {
         JPanel panel = new JPanel();
 
-        panel.setBackground(UIConstants.MAIN_COLOR);
+        panel.setBackground(UIConstants.SUB_COLOR);
         panel.setLayout(new FlowLayout(FlowLayout.CENTER));
 
         JLabel title = new JLabel("XXXXXX System");
@@ -56,18 +56,36 @@ public class LoginFrame extends JFrame {
         JPanel panelInput = new JPanel();
         panelInput.setLayout(new FlowLayout(FlowLayout.CENTER, 10, 20));
 
-        btnLogin = new JButton("Login");
-        JLabel labelUid = new JLabel("username:");
-        JLabel labelPwd = new JLabel("password:");
+        JPanel panelLogin = new JPanel();
+        panelLogin.setBackground(UIConstants.SUB_COLOR);
+        panelLogin.setLayout(new FlowLayout(FlowLayout.CENTER));
+
+        btnLogin = new IconButton(UIConstants.ICON_LOGIN_LOGIN,
+                "",
+                "login");
+
+        IconButton labelUid = new IconButton(UIConstants.ICON_LOGIN_USER,
+                "",
+                "6-16 Characters(including all letters and number)");
+
+        IconButton labelPwd = new IconButton(UIConstants.ICON_LOGIN_PASSWORD,
+                "",
+                "6-16 Any Characters");
+
+        labelUid.setEnabled(false);
+        labelPwd.setEnabled(false);
 
         inputUid = new JTextField();
         inputPwd = new JPasswordField();
 
-        btnLogin.setPreferredSize(new Dimension(80, 40));
+        inputUid.setBackground(new Color(233, 230, 229));
+        inputPwd.setBackground(new Color(233, 230, 229));
+
+        btnLogin.setPreferredSize(new Dimension(110, 40));
         labelUid.setPreferredSize(UIConstants.LABEL_SIZE);
         labelPwd.setPreferredSize(UIConstants.LABEL_SIZE);
-        inputUid.setPreferredSize(new Dimension(135, 27));
-        inputPwd.setPreferredSize(new Dimension(135, 27));
+        inputUid.setPreferredSize(new Dimension(155, 34));
+        inputPwd.setPreferredSize(new Dimension(155, 34));
 
         inputUid.setDocument(new RegExpForTextField("[a-zA-Z0-9]{1,16}"));
         inputPwd.setDocument(new RegExpForTextField(".{1,16}"));
@@ -77,8 +95,10 @@ public class LoginFrame extends JFrame {
         panelInput.add(labelPwd);
         panelInput.add(inputPwd);
 
+        panelLogin.add(btnLogin);
+
         panelMain.add(panelInput, BorderLayout.CENTER);
-        panelMain.add(btnLogin,BorderLayout.SOUTH);
+        panelMain.add(panelLogin,BorderLayout.SOUTH);
 
         return panelMain;
     }

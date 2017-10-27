@@ -1,6 +1,7 @@
 package main.java.UI.panels;
 
 import main.java.Tools.RegExpForTextField;
+import main.java.UI.IconButton;
 import main.java.UI.UIConstants;
 
 import javax.swing.*;
@@ -10,8 +11,8 @@ import java.awt.event.FocusEvent;
 
 public class OperatorPanel extends JPanel {
 
-    private JButton btnAddDevice;
-    private JButton btnEditDevice;
+    private IconButton btnAddDevice;
+    private IconButton btnEditDevice;
 
     public OperatorPanel() {
         init();
@@ -25,17 +26,17 @@ public class OperatorPanel extends JPanel {
     }
 
     private void addComponent() {
-        this.add(upperPanel(), BorderLayout.NORTH);
+//        this.add(upperPanel(), BorderLayout.NORTH);
         this.add(midPanel(), BorderLayout.CENTER);
     }
 
     private JPanel upperPanel() {
         JPanel panel = new JPanel();
 
-        panel.setBackground(UIConstants.MAIN_COLOR);
-        panel.setLayout(new FlowLayout(FlowLayout.LEFT, 10, 10));
+        panel.setBackground(UIConstants.SUB_COLOR);
+        panel.setLayout(new FlowLayout(FlowLayout.LEFT, 10, 13));
 
-        JLabel title = new JLabel("Operator Panel");
+        JLabel title = new JLabel("Operating Panel");
         title.setFont(new Font("font", Font.BOLD, 20));
         panel.add(title);
 
@@ -53,21 +54,25 @@ public class OperatorPanel extends JPanel {
         panelMain.setBackground(UIConstants.MAIN_COLOR);
         panelMain.setLayout(new BorderLayout());
 
-        panelNorth.setBackground(UIConstants.MAIN_COLOR);
-        panelNorth.setLayout(new GridLayout(1, 2, 0, 15));
+        panelNorth.setBackground(new Color(201, 201, 201));
+        panelNorth.setLayout(new GridLayout(1, 2, 20, 15));
 
-        btnAddDevice = new JButton("Add Device");
-        btnEditDevice = new JButton("Edit Device");
+        btnAddDevice = new IconButton(UIConstants.ICON_OPERATOR_ADD,
+                "Add Device",
+                "Add Device into the database");
+        btnEditDevice = new IconButton(UIConstants.ICON_OPERATOR_EDIT,
+                "Edit Device",
+                "Edit Device from the database");
 
         panelNorth.add(btnAddDevice);
         panelNorth.add(btnEditDevice);
 
-        panelCenter.setBackground(UIConstants.MAIN_COLOR);
+        panelCenter.setBackground(UIConstants.SSUB_COLOR);
         panelCenter.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 0));
 
         for (int i = 0; i < 4; i++) {
             panelItems[i] = new JPanel();
-            panelItems[i].setBackground(UIConstants.MAIN_COLOR);
+            panelItems[i].setBackground(UIConstants.SSUB_COLOR);
         }
 //        panelItems[3] = new JPanel();
 //        panelItems[3].setBackground(UIConstants.MAIN_COLOR);
@@ -196,20 +201,28 @@ public class OperatorPanel extends JPanel {
 
         JLabel labelNavigating = new JLabel(statusName);
         labelNavigating.setFont(new Font("font", Font.BOLD, 20));
+        JLabel labelCoincidenceFactorK0 = new JLabel("Coincidence Factor K0:       ");
         JLabel labelMachineLoadFactorK2 = new JLabel("Machine Load Factor K2:    ");
-        JLabel labelGeneratorLoadFactorK3 = new JLabel("Generator Load Factor K3:");
         JLabel labelLoadType = new JLabel("Load Type:                           ");
 
+        JTextField inputCoincidenceFactorK0 = new JTextField();
         JTextField inputMachineLoadFactorK2 = new JTextField();
-        JTextField inputGeneratorLoadFactorK3 = new JTextField();
 
+        inputCoincidenceFactorK0.setPreferredSize(new Dimension(60, 30));
         inputMachineLoadFactorK2.setPreferredSize(new Dimension(60, 30));
-        inputGeneratorLoadFactorK3.setPreferredSize(new Dimension(60, 30));
 
+        inputCoincidenceFactorK0.setDocument(new RegExpForTextField(
+                "^((1)|(0)|(0\\.)|(0\\.[0-9])|(0\\.[0-9][1-9])|(0\\.[1-9][0-9]))$"));
         inputMachineLoadFactorK2.setDocument(new RegExpForTextField(
                 "^((1)|(0)|(0\\.)|(0\\.[0-9])|(0\\.[0-9][1-9])|(0\\.[1-9][0-9]))$"));
-        inputGeneratorLoadFactorK3.setDocument(new RegExpForTextField(
-                "^((1)|(0)|(0\\.)|(0\\.[0-9])|(0\\.[0-9][1-9])|(0\\.[1-9][0-9]))$"));
+
+        inputCoincidenceFactorK0.addFocusListener(new FocusAdapter() {
+            @Override
+            public void focusLost(FocusEvent e) {
+                ifInputValueInvalid(inputCoincidenceFactorK0.getText());
+                inputCoincidenceFactorK0.setText("");
+            }
+        });
 
         inputMachineLoadFactorK2.addFocusListener(new FocusAdapter() {
             @Override
@@ -219,16 +232,8 @@ public class OperatorPanel extends JPanel {
             }
         });
 
-        inputGeneratorLoadFactorK3.addFocusListener(new FocusAdapter() {
-            @Override
-            public void focusLost(FocusEvent e) {
-                ifInputValueInvalid(inputGeneratorLoadFactorK3.getText());
-                inputGeneratorLoadFactorK3.setText("");
-            }
-        });
-
+        inputCoincidenceFactorK0.setHorizontalAlignment(JTextField.CENTER);
         inputMachineLoadFactorK2.setHorizontalAlignment(JTextField.CENTER);
-        inputGeneratorLoadFactorK3.setHorizontalAlignment(JTextField.CENTER);
 
         JComboBox<String> comboBoxLoadType = new JComboBox<>();
         comboBoxLoadType.addItem(" I      ");
@@ -236,10 +241,10 @@ public class OperatorPanel extends JPanel {
         comboBoxLoadType.addItem(" III    ");
 
         panelItems[0].add(labelNavigating);
-        panelItems[1].add(labelMachineLoadFactorK2);
-        panelItems[1].add(inputMachineLoadFactorK2);
-        panelItems[2].add(labelGeneratorLoadFactorK3);
-        panelItems[2].add(inputGeneratorLoadFactorK3);
+        panelItems[1].add(labelCoincidenceFactorK0);
+        panelItems[1].add(inputCoincidenceFactorK0);
+        panelItems[2].add(labelMachineLoadFactorK2);
+        panelItems[2].add(inputMachineLoadFactorK2);
         panelItems[3].add(labelLoadType);
         panelItems[3].add(comboBoxLoadType);
 
