@@ -2,12 +2,20 @@ package main.java.Logic;
 
 import main.java.Logic.bean.Device;
 import main.java.Tools.DbUtil;
+import org.apache.poi.hssf.usermodel.*;
+import org.apache.poi.hssf.util.HSSFColor;
 
+import javax.swing.*;
+import javax.swing.filechooser.FileFilter;
+import javax.swing.table.TableModel;
+
+import java.io.*;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.util.Vector;
+
 
 public class DatabaseManager {
 
@@ -15,12 +23,18 @@ public class DatabaseManager {
 
     private static DbUtil dbMySQL;
 
+    private static ResultSet resultSet;
+
     private static Vector<Vector<Object>> dbDatas;
     private static Vector<String> dbHeads;
+
+    public Vector<Device> devices;
 
     private DatabaseManager() {
         init();
         initDbData();
+
+        setDevicesData();
     }
 
     public static DatabaseManager getInstance() {
@@ -30,21 +44,21 @@ public class DatabaseManager {
         return instance;
     }
 
-    public static DbUtil getDbMySQL() {
+    public DbUtil getDbMySQL() {
         if (dbMySQL == null) {
             initDbData();
         }
         return dbMySQL;
     }
 
-    public static Vector<String> getDbHeads() {
+    public Vector<String> getDbHeads() {
         if (dbHeads == null) {
             initDbData();
         }
         return dbHeads;
     }
 
-    public static Vector<Vector<Object>> getDbDatas() {
+    public Vector<Vector<Object>> getDbDatas() {
         if (dbDatas == null) {
             initDbData();
         }
@@ -57,13 +71,16 @@ public class DatabaseManager {
 
         dbHeads = new Vector<>();
         dbDatas = new Vector<>();
+
+        devices = new Vector<>();
     }
 
-    private static void initDbData() {
+
+    private void getDatabaseData() {
         try {
             Connection conn = dbMySQL.getConnection();
 
-            ResultSet rs = dbMySQL.execQuery("select" +
+            resultSet = dbMySQL.execQuery("select" +
                     " `参数`.`序号`,`参数`.`用电设备名称`," +
                     "`参数`.`数量`,`参数`.`机械轴功率/kW`," +
                     "`参数`.`电机功率/kW`," +
@@ -91,21 +108,78 @@ public class DatabaseManager {
                     "`参数`.`序号`=`装卸货`.`序号` and " +
                     "`参数`.`序号`=`应急`.`序号`;");
 
-            ResultSetMetaData rsmd = rs.getMetaData();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void initDbData() {
+
+        try {
+            getDatabaseData();
+            ResultSetMetaData rsmd = resultSet.getMetaData();
 
             for (int i = 1; i <= rsmd.getColumnCount(); i++) {
                 dbHeads.add(rsmd.getColumnName(i));
             }
 
-            while (rs.next()) {
+            while (resultSet.next()) {
                 Vector<Object> obj = new Vector<>();
                 for (int i = 1; i <= rsmd.getColumnCount(); i++) {
-                    obj.add(rs.getObject(i));
+                    obj.add(resultSet.getObject(i));
                 }
                 dbDatas.add(obj);
             }
 
             dbMySQL.closeConnection();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    private void setDevicesData() {
+
+        try {
+            getDatabaseData();
+            ResultSetMetaData rsmd = resultSet.getMetaData();
+
+            while (resultSet.next()) {
+
+                Device device = new Device();
+
+                for (int i = 1, status = 0; i <= rsmd.getColumnCount(); i++) {
+                    Object obj = resultSet.getObject(i);
+                    if (obj == null) {
+                        switch (i) {
+                            case 3:
+                                obj = 1;
+                                break;
+                            case 6:
+                                obj = 100.0f;
+                                break;
+                            case 4: case 5: case 7: case 8:
+                                obj = 1.0f;
+                                break;
+                            case 20:
+                                obj = "";
+                                break;
+                            default:
+                                obj = 0.0f;
+                        }
+                    }
+                    if (i >= 9 && i <= 18) {
+                        OperatorManager.setter(
+                                device, OperatorManager.deviceAttrs[i - 1],
+                                status, obj, int.class, obj.getClass());
+                        status += (i + 1) % 2;
+                    } else {
+                        OperatorManager.setter(device, OperatorManager.deviceAttrs[i - 1], obj, obj.getClass());
+                    }
+                }
+                devices.add(device);
+            }
+//            System.out.println(devices);
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -122,6 +196,15 @@ public class DatabaseManager {
                             "`电机效率/%`,`利用系数K1`,`设备总功率/kW`,`负荷类别`," +
                             "` 电机转速/（r/m）`)" +
                             "VALUES(" +
+                            "'" + device.getDeviceName() + "'," +
+                            "'" + device.getNumber() + "'," +
+                            "'" + device.getShaftPower() + "'," +
+                            "'" + device.getShaftPower() + "'," +
+                            "'" + device.getShaftPower() + "'," +
+                            "'" + device.getShaftPower() + "'," +
+                            "'" + device.getShaftPower() + "'," +
+                            "'" + device.getShaftPower() + "'," +
+                            "'" + device.getShaftPower() + "'," +
                             "'航海仪器','2',null,null,null,null,'1','II',null);");
         } catch (SQLException e) {
             e.printStackTrace();
@@ -131,4 +214,5 @@ public class DatabaseManager {
     public void updateDevice() {
 
     }
+
 }

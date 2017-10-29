@@ -108,10 +108,6 @@ public class ToolBarPanel extends JPanel {
         this.add(panelDown, BorderLayout.SOUTH);
     }
 
-    private void switchPanel(JPanel target) {
-
-    }
-
     private void addListener() {
         btnDb.addActionListener((e)-> {
             if(curActivatedBtn != null) {

@@ -7,11 +7,17 @@ public class OperatorManager {
     private static OperatorManager instance;
 
     public static final String[] deviceAttrs = {
+            "Id",
             "DeviceName", "Number",
             "ShaftPower",
             "MotorPower", "MotorEfficiency", "FactorK1",
             "DevicesPower",
-            "FactorK2", "FactorK0", "LoadType",
+            "FactorK2", "FactorK0",
+            "FactorK2", "FactorK0",
+            "FactorK2", "FactorK0",
+            "FactorK2", "FactorK0",
+            "FactorK2", "FactorK0",
+            "LoadType",
             "MotorRevSpeed"};
 
     private OperatorManager() {
@@ -47,6 +53,16 @@ public class OperatorManager {
         try {
             Method met = obj.getClass().getMethod("get" + attr);
             return met.invoke(obj);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public static Object getter(Object obj, String attr, Object arg, Class<?> type) {
+        try {
+            Method met = obj.getClass().getMethod("get" + attr, type);
+            return met.invoke(obj, arg);
         } catch (Exception e) {
             e.printStackTrace();
         }

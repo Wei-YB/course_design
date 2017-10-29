@@ -1,6 +1,9 @@
 package main.java.UI.panels;
 
+import main.java.Logic.DatabaseManager;
 import main.java.Logic.Operator;
+import main.java.Logic.OperatorManager;
+import main.java.Logic.bean.Device;
 import main.java.Tools.RegExpForTextField;
 import main.java.UI.IconButton;
 import main.java.UI.UIConstants;
@@ -26,6 +29,8 @@ public class OperatorPanel extends JPanel {
     private JTextField inputMotorEfficiency;
     private JTextField inputUtilizationFactor;
     private JTextField inputMotorRevSpeed;
+
+    JTextField[] outputTextField;
 
     private JPanel[] panelItems;
 
@@ -335,7 +340,7 @@ public class OperatorPanel extends JPanel {
 
         labelTitle.setFont(new Font("font", Font.BOLD, 20));
 
-        JTextField[] outputTextField = new JTextField[5];
+        outputTextField = new JTextField[5];
 
         panelItems[0].add(labelTitle);
 
@@ -380,17 +385,58 @@ public class OperatorPanel extends JPanel {
         }
     }
 
+    private void updateDataDisplay(Device device) {
+
+        inputDeviceName.setText((String)OperatorManager.getter(device, "DeviceName"));
+        inputDeviceNumber.setText(String.valueOf((int)OperatorManager.getter(device, "Number")));
+        inputShaftPower.setText(String.valueOf((float)OperatorManager.getter(device, "ShaftPower")));
+        inputMotorPower.setText(String.valueOf((float)OperatorManager.getter(device, "MotorPower")));
+        inputDevicesPower.setText(String.valueOf((float)OperatorManager.getter(device, "DevicesPower")));
+        inputMotorEfficiency.setText(String.valueOf((float)OperatorManager.getter(device, "MotorEfficiency")));
+        inputUtilizationFactor.setText(String.valueOf((float)OperatorManager.getter(device, "FactorK1")));
+        inputMotorRevSpeed.setText((String)OperatorManager.getter(device, "MotorRevSpeed"));
+
+        for (int i = 0; i < 5; i++) {
+            ((JTextField)((JPanel)panelItems[3].getComponent(i)).getComponent(2))
+                    .setText(String.valueOf((float)OperatorManager.getter(device, "FactorK2", i, int.class)));
+
+            ((JTextField)((JPanel)panelItems[3].getComponent(i)).getComponent(4))
+                    .setText(String.valueOf((float)OperatorManager.getter(device, "FactorK0", i, int.class)));
+
+//            int index = 0;
+//            switch ((String)OperatorManager.getter(device, "LoadType")) {
+//                case "I":
+//                    index = 0;
+//                    break;
+//                case "II":
+//                    index = 1;
+//                    break;
+//                case "III":
+//                    index = 2;
+//                    break;
+//            }
+
+//            ((JComboBox<String>)((JPanel)panelItems[3].getComponent(i)).getComponent(6))
+//                    .setSelectedIndex(index);
+        }
+    }
+
     private void addListener() {
 
-        btnAddDevice.addActionListener((e -> {
+        btnAddDevice.addActionListener((e) -> {
+            updateDataDisplay(DatabaseManager.getInstance().devices.get(1));
+        });
+
+        btnEditDevice.addActionListener((e) -> {
+
+        });
+
+        btnCalculate.addActionListener((e) -> {
             Operator operator = new Operator();
-        }));
 
-        btnEditDevice.addActionListener((e -> {
-
-        }));
-
-
-
+            for (int i = 0; i < 5; i++) {
+                outputTextField[i].setText(String.valueOf(operator.calculate(i)));
+            }
+        });
     }
 }
