@@ -32,9 +32,6 @@ public class UIConstants {
     public static final ImageIcon ICON_OPERATOR = new ImageIcon(
             AppMain.class.getResource("/icon/panel/operator.png"));
 
-    public static final ImageIcon ICON_RESULT = new ImageIcon(
-            AppMain.class.getResource("/icon/panel/result.png"));
-
     public static final ImageIcon ICON_LOGGER = new ImageIcon(
             AppMain.class.getResource("/icon/panel/logger.png"));
 
@@ -59,6 +56,9 @@ public class UIConstants {
 
     public static final ImageIcon ICON_LOGIN_LOGIN = new ImageIcon(
             AppMain.class.getResource("/icon/login.png"));
+
+    public static final ImageIcon ICON_RESULT = new ImageIcon(
+            AppMain.class.getResource("/icon/panel/result.png"));
     /**
      * Size
      */
@@ -71,8 +71,8 @@ public class UIConstants {
     public static final int SCREEN_HEIGHT = (int) java.awt.Toolkit.getDefaultToolkit().getScreenSize().height;
 
     public static final Rectangle APP_BOUNDS = new Rectangle(
-            (SCREEN_WIDTH - 1100) / 2, (SCREEN_HEIGHT - 700) / 2,
-            1100, 700);
+            (SCREEN_WIDTH - 1100) / 2, (SCREEN_HEIGHT - 800) / 2,
+            1100, 800);
 
     /**
      * Text

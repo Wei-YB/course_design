@@ -13,7 +13,7 @@ public class ToolBarPanel extends JPanel {
 
     private static IconButton btnDb;
     private static IconButton btnOperator;
-    private static IconButton btnResult;
+//    private static IconButton btnResult;
     private static IconButton btnLogger;
     private static IconButton btnAbout;
 
@@ -50,19 +50,19 @@ public class ToolBarPanel extends JPanel {
 
         JPanel panelBtnDb = new JPanel();
         JPanel panelBtnOperator = new JPanel();
-        JPanel panelBtnResult = new JPanel();
+//        JPanel panelBtnResult = new JPanel();
         JPanel panelBtnLogger = new JPanel();
         JPanel panelBtnAbout = new JPanel();
 
         panelBtnDb.setLayout(new GridLayout(1, 1));
         panelBtnOperator.setLayout(new GridLayout(1, 1));
-        panelBtnResult.setLayout(new GridLayout(1, 1));
+//        panelBtnResult.setLayout(new GridLayout(1, 1));
         panelBtnLogger.setLayout(new GridLayout(1, 1));
         panelBtnAbout.setLayout(new GridLayout(1, 1));
 
         panelBtnDb.setBackground(UIConstants.TOOL_BAR_COLOR);
         panelBtnOperator.setBackground(UIConstants.TOOL_BAR_COLOR);
-        panelBtnResult.setBackground(UIConstants.TOOL_BAR_COLOR);
+//        panelBtnResult.setBackground(UIConstants.TOOL_BAR_COLOR);
         panelBtnLogger.setBackground(UIConstants.TOOL_BAR_COLOR);
         panelBtnAbout.setBackground(UIConstants.TOOL_BAR_COLOR);
 
@@ -76,10 +76,10 @@ public class ToolBarPanel extends JPanel {
                 "Operator ",
                 "add/edit any devices");
 
-        btnResult = new IconButton(
-                UIConstants.ICON_RESULT,
-                "Calculate ",
-                "calculate the expected result");
+//        btnResult = new IconButton(
+//                UIConstants.ICON_RESULT,
+//                "Calculate ",
+//                "calculate the expected result");
 
         btnLogger = new IconButton(
                 UIConstants.ICON_LOGGER,
@@ -93,13 +93,13 @@ public class ToolBarPanel extends JPanel {
 
         panelBtnDb.add(btnDb);
         panelBtnOperator.add(btnOperator);
-        panelBtnResult.add(btnResult);
+//        panelBtnResult.add(btnResult);
         panelBtnLogger.add(btnLogger);
         panelBtnAbout.add(btnAbout);
 
         panelUp.add(panelBtnDb);
         panelUp.add(panelBtnOperator);
-        panelUp.add(panelBtnResult);
+//        panelUp.add(panelBtnResult);
         panelUp.add(panelBtnLogger);
 
         panelDown.add(panelBtnAbout);
@@ -133,15 +133,15 @@ public class ToolBarPanel extends JPanel {
             app.switchPanel(AppMain.operatorPanel);
         });
 
-        btnResult.addActionListener((e)-> {
-            if(curActivatedBtn != null) {
-                curActivatedBtn.getParent().setBackground(UIConstants.TOOL_BAR_COLOR);
-            }
-            curActivatedBtn = btnResult;
-            curActivatedBtn.getParent().setBackground(UIConstants.TOOL_BAR_ACTIVATED_COLOR);
-            AppMain app = AppMain.getInstance();
-            app.switchPanel(AppMain.resultPanel);
-        });
+//        btnResult.addActionListener((e)-> {
+//            if(curActivatedBtn != null) {
+//                curActivatedBtn.getParent().setBackground(UIConstants.TOOL_BAR_COLOR);
+//            }
+//            curActivatedBtn = btnResult;
+//            curActivatedBtn.getParent().setBackground(UIConstants.TOOL_BAR_ACTIVATED_COLOR);
+//            AppMain app = AppMain.getInstance();
+//            app.switchPanel(AppMain.resultPanel);
+//        });
 
         btnLogger.addActionListener((e)-> {
             if(curActivatedBtn != null) {
@@ -170,8 +170,8 @@ public class ToolBarPanel extends JPanel {
                 return btnDb;
             case "Operator":
                 return btnOperator;
-            case "Result":
-                return btnResult;
+//            case "Result":
+//                return btnResult;
             case "Logger":
                 return btnLogger;
             case "About":

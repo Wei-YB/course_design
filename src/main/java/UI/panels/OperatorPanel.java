@@ -9,6 +9,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 
 public class OperatorPanel extends JPanel {
 
@@ -19,14 +21,28 @@ public class OperatorPanel extends JPanel {
     private JTextField inputDeviceNumber;
 
     private JTextField inputShaftPower;
-    private JTextField inputGeneratorPower;
-    private JTextField inputGeneratorEfficiency;
+    private JTextField inputMotorPower;
+    private JTextField inputDevicesPower;
+    private JTextField inputMotorEfficiency;
     private JTextField inputUtilizationFactor;
-    private JTextField inputGeneratorRevSpeed;
+    private JTextField inputMotorRevSpeed;
 
-    private JPanel[] panelItems;    //TextFields in [1](K0) and [2](K2)
-                                    //ComboBox in [3]
+    private JTextField outputNavigatingPower;
+    private JTextField outputWeighingPower;
+    private JTextField outputBerthingPower;
+    private JTextField outputStevedoringPower;
+    private JTextField outputEmergencyPower;
 
+    private JPanel[] panelItems;
+
+    private IconButton btnCalculate;
+
+    private final String[] comboBoxLabels = {
+            " I      ",
+            " II     ",
+            " III    "};
+
+    private final DefaultComboBoxModel comboBoxModel = new DefaultComboBoxModel(comboBoxLabels);
 
     public OperatorPanel() {
         init();
@@ -42,6 +58,7 @@ public class OperatorPanel extends JPanel {
     private void addComponent() {
 //        this.add(upperPanel(), BorderLayout.NORTH);
         this.add(midPanel(), BorderLayout.CENTER);
+        this.add(lowerPanel(), BorderLayout.SOUTH);
     }
 
     private JPanel upperPanel() {
@@ -63,7 +80,8 @@ public class OperatorPanel extends JPanel {
         JPanel panelNorth = new JPanel();
 
         JPanel panelCenter = new JPanel();
-        JPanel[] panelItems = new JPanel[4];
+
+        panelItems = new JPanel[4];
 
         panelMain.setBackground(UIConstants.MAIN_COLOR);
         panelMain.setLayout(new BorderLayout());
@@ -113,47 +131,66 @@ public class OperatorPanel extends JPanel {
         panelItems[0].add(labelDeviceNumber);
         panelItems[0].add(inputDeviceNumber);
 
-        JLabel labelShaftPower = new JLabel("      Shaft Power:       ");
-        JLabel labelGeneratorPower = new JLabel("      Generator Power:  ");
-        JLabel labelGeneratorEfficiency = new JLabel("Generator Efficiency:");
+        JLabel labelShaftPower = new JLabel("Shaft Power:");
+        JLabel labelMotorPower = new JLabel("Motor Power:");
+        JLabel labelDevicesPower = new JLabel("Devices Power:");
+        JLabel labelMotorEfficiency = new JLabel("Motor Efficiency:");
         JLabel labelUtilizationFactor = new JLabel("Utilization Factor K1:");
-        JLabel labelGeneratorRevSpeed = new JLabel("Generator Rev Speed:");
+        JLabel labelMotorRevSpeed = new JLabel("Motor Rev Speed:");
 
         JLabel labelSPUnit = new JLabel("kW");
-        JLabel labelGPUnit = new JLabel("kW");
+        JLabel labelMPUnit = new JLabel("kW");
+        JLabel labelDPUnit = new JLabel("kW");
         JLabel labelGEUnit = new JLabel("%");
         JLabel labelGRSUnit = new JLabel("rpm");
 
         labelSPUnit.setFont(new Font("font", Font.ITALIC, 15));
-        labelGPUnit.setFont(new Font("font", Font.ITALIC, 15));
+        labelMPUnit.setFont(new Font("font", Font.ITALIC, 15));
+        labelDPUnit.setFont(new Font("font", Font.ITALIC, 15));
         labelGEUnit.setFont(new Font("font", Font.ITALIC, 15));
         labelGRSUnit.setFont(new Font("font", Font.ITALIC, 15));
 
         inputShaftPower = new JTextField();
-        inputGeneratorPower = new JTextField();
-        inputGeneratorEfficiency = new JTextField();
+        inputMotorPower = new JTextField();
+        inputDevicesPower = new JTextField();
+        inputMotorEfficiency = new JTextField();
         inputUtilizationFactor = new JTextField();
-        inputGeneratorRevSpeed = new JTextField();
+        inputMotorRevSpeed = new JTextField();
 
         inputShaftPower.setPreferredSize(new Dimension(90, 30));
-        inputGeneratorPower.setPreferredSize(new Dimension(90, 30));
-        inputGeneratorEfficiency.setPreferredSize(new Dimension(60, 30));
+        inputMotorPower.setPreferredSize(new Dimension(90, 30));
+        inputDevicesPower.setPreferredSize(new Dimension(90, 30));
+        inputMotorEfficiency.setPreferredSize(new Dimension(60, 30));
         inputUtilizationFactor.setPreferredSize(new Dimension(70, 30));
-        inputGeneratorRevSpeed.setPreferredSize(new Dimension(60, 30));
+        inputMotorRevSpeed.setPreferredSize(new Dimension(60, 30));
 
-        inputShaftPower.setDocument(new RegExpForTextField("^(([1-9])|([1-9][0-9]))$"));
-        inputGeneratorPower.setDocument(new RegExpForTextField("^(([1-9])|([1-9][0-9]))$"));
-        inputGeneratorEfficiency.setDocument(new RegExpForTextField("^(([1-9])|([1-9][0-9])|(100))$"));
+        inputShaftPower.setDocument(new RegExpForTextField(
+                "^(([0-9])|([0-9]\\.)|([0-9]\\.[0-9])|([0-9]\\.[0-9][1-9])|" +
+                        "([0-9]\\.[0-9][0-9])|([1-9][0-9])|([1-9][0-9]\\.)|" +
+                        "([1-9][0-9]\\.[0-9])|([1-9][0-9]\\.[0-9][0-9]))$"));
+        inputMotorPower.setDocument(new RegExpForTextField(
+                "^(([0-9])|([0-9]\\.)|([0-9]\\.[0-9])|([0-9]\\.[0-9][1-9])|" +
+                        "([0-9]\\.[0-9][0-9])|([1-9][0-9])|([1-9][0-9]\\.)|" +
+                        "([1-9][0-9]\\.[0-9])|([1-9][0-9]\\.[0-9][0-9]))$"));
+        inputDevicesPower.setDocument(new RegExpForTextField(
+                "^(([0-9])|([0-9]\\.)|([0-9]\\.[0-9])|([0-9]\\.[0-9][1-9])|" +
+                        "([0-9]\\.[0-9][0-9])|([1-9][0-9])|([1-9][0-9]\\.)|" +
+                        "([1-9][0-9]\\.[0-9])|([1-9][0-9]\\.[0-9][0-9]))$"));
+        inputMotorEfficiency.setDocument(new RegExpForTextField(
+                "^(([0-9])|([0-9]\\.)|([0-9]\\.[0-9])|([0-9]\\.[0-9][1-9])|" +
+                        "([0-9]\\.[0-9][0-9])|([1-9][0-9])|([1-9][0-9]\\.)|" +
+                        "([1-9][0-9]\\.[0-9])|([1-9][0-9]\\.[0-9][0-9]))$"));
         inputUtilizationFactor.setDocument(new RegExpForTextField(
                 "^((1)|(0)|(0\\.)|(0\\.[0-9])|(0\\.[0-9][1-9])|(0\\.[1-9][0-9]))$"));
-        inputGeneratorRevSpeed.setDocument(new RegExpForTextField(
+        inputMotorRevSpeed.setDocument(new RegExpForTextField(
                 "^(([1-9])|([1-9][0-9])|([1-9][0-9][0-9]|([1-2][0-9][0-9][0-9])|(3000)))$"));
 
         inputShaftPower.setHorizontalAlignment(JTextField.CENTER);
-        inputGeneratorPower.setHorizontalAlignment(JTextField.CENTER);
-        inputGeneratorEfficiency.setHorizontalAlignment(JTextField.CENTER);
+        inputMotorPower.setHorizontalAlignment(JTextField.CENTER);
+        inputDevicesPower.setHorizontalAlignment(JTextField.CENTER);
+        inputMotorEfficiency.setHorizontalAlignment(JTextField.CENTER);
         inputUtilizationFactor.setHorizontalAlignment(JTextField.CENTER);
-        inputGeneratorRevSpeed.setHorizontalAlignment(JTextField.CENTER);
+        inputMotorRevSpeed.setHorizontalAlignment(JTextField.CENTER);
 
         inputUtilizationFactor.addFocusListener(new FocusAdapter() {
             @Override
@@ -167,16 +204,20 @@ public class OperatorPanel extends JPanel {
         panelItems[1].add(inputShaftPower);
         panelItems[1].add(labelSPUnit);
 
-        panelItems[1].add(labelGeneratorPower);
-        panelItems[1].add(inputGeneratorPower);
-        panelItems[1].add(labelGPUnit);
+        panelItems[1].add(labelMotorPower);
+        panelItems[1].add(inputMotorPower);
+        panelItems[1].add(labelMPUnit);
 
-        panelItems[2].add(labelGeneratorEfficiency);
-        panelItems[2].add(inputGeneratorEfficiency);
+        panelItems[1].add(labelDevicesPower);
+        panelItems[1].add(inputDevicesPower);
+        panelItems[1].add(labelDPUnit);
+
+        panelItems[2].add(labelMotorEfficiency);
+        panelItems[2].add(inputMotorEfficiency);
         panelItems[2].add(labelGEUnit);
 
-        panelItems[2].add(labelGeneratorRevSpeed);
-        panelItems[2].add(inputGeneratorRevSpeed);
+        panelItems[2].add(labelMotorRevSpeed);
+        panelItems[2].add(inputMotorRevSpeed);
         panelItems[2].add(labelGRSUnit);
 
         panelItems[2].add(labelUtilizationFactor);
@@ -187,6 +228,8 @@ public class OperatorPanel extends JPanel {
         panelItems[3].add(statusPanel("Berthing"));
         panelItems[3].add(statusPanel("Stevedoring"));
         panelItems[3].add(statusPanel("Emergency"));
+
+        panelItems[3].add(resultPanel());
 
         for (int i = 0; i < 4; i++) {
             panelCenter.add(panelItems[i]);
@@ -201,7 +244,7 @@ public class OperatorPanel extends JPanel {
     private JPanel statusPanel(String statusName) {
         JPanel panel = new JPanel();
 
-        panelItems = new JPanel[4];
+        JPanel[] panelItems = new JPanel[4];
 
         panel.setBackground(UIConstants.MAIN_COLOR);
         panel.setLayout(new GridLayout(4, 1));
@@ -211,7 +254,6 @@ public class OperatorPanel extends JPanel {
             panelItems[i].setBackground(Color.LIGHT_GRAY);
             panelItems[i].setLayout(new FlowLayout(FlowLayout.LEFT, 15, 8));
         }
-
 
         JLabel labelNavigating = new JLabel(statusName);
         labelNavigating.setFont(new Font("font", Font.BOLD, 20));
@@ -249,10 +291,7 @@ public class OperatorPanel extends JPanel {
         inputCoincidenceFactorK0.setHorizontalAlignment(JTextField.CENTER);
         inputMachineLoadFactorK2.setHorizontalAlignment(JTextField.CENTER);
 
-        JComboBox<String> comboBoxLoadType = new JComboBox<>();
-        comboBoxLoadType.addItem(" I      ");
-        comboBoxLoadType.addItem(" II     ");
-        comboBoxLoadType.addItem(" III    ");
+        JComboBox<String> comboBoxLoadType = new JComboBox<>(comboBoxModel);
 
         panelItems[0].add(labelNavigating);
         panelItems[1].add(labelCoincidenceFactorK0);
@@ -266,6 +305,98 @@ public class OperatorPanel extends JPanel {
             panel.add(panelItems[i]);
         }
 
+        return panel;
+    }
+
+    private JPanel resultPanel() {
+        JPanel panel = new JPanel();
+
+        JPanel[] panelItems = new JPanel[6];
+        for (int i = 0; i < 6; i++) {
+            panelItems[i] = new JPanel();
+
+            panelItems[i].setBackground(Color.LIGHT_GRAY);
+            panelItems[i].setLayout(new FlowLayout(FlowLayout.LEFT, 20, 5));
+        }
+
+        panel.setBackground(UIConstants.MAIN_COLOR);
+        panel.setLayout(new GridLayout(6, 1));
+
+
+        JLabel labelTitle = new JLabel("Result");
+        JLabel labelNavigating = new JLabel("航行所需总功率:    ");
+        JLabel labelWeighing = new JLabel("起锚所需总功率:    ");
+        JLabel labelBerthing = new JLabel("停泊所需总功率:    ");
+        JLabel labelStevedoring = new JLabel("装卸货所需总功率: ");
+        JLabel labelEmergency = new JLabel("应急所需总功率:    ");
+
+        JLabel[] labelUnit = new JLabel[5];
+
+        for (int i = 0; i < 5; i++) {
+            labelUnit[i] = new JLabel("kW");
+            labelUnit[i].setFont(new Font("font", Font.ITALIC, 15));
+        }
+
+        labelTitle.setFont(new Font("font", Font.BOLD, 20));
+
+        outputNavigatingPower = new JTextField();
+        outputWeighingPower = new JTextField();
+        outputBerthingPower = new JTextField();
+        outputStevedoringPower = new JTextField();
+        outputEmergencyPower = new JTextField();
+
+        outputNavigatingPower.setEditable(false);
+        outputWeighingPower.setEditable(false);
+        outputBerthingPower.setEditable(false);
+        outputStevedoringPower.setEditable(false);
+        outputEmergencyPower.setEditable(false);
+
+        outputNavigatingPower.setPreferredSize(new Dimension(70, 30));
+        outputWeighingPower.setPreferredSize(new Dimension(70, 30));
+        outputBerthingPower.setPreferredSize(new Dimension(70, 30));
+        outputStevedoringPower.setPreferredSize(new Dimension(70, 30));
+        outputEmergencyPower.setPreferredSize(new Dimension(70, 30));
+
+        outputNavigatingPower.setHorizontalAlignment(JTextField.CENTER);
+        outputWeighingPower.setHorizontalAlignment(JTextField.CENTER);
+        outputBerthingPower.setHorizontalAlignment(JTextField.CENTER);
+        outputStevedoringPower.setHorizontalAlignment(JTextField.CENTER);
+        outputEmergencyPower.setHorizontalAlignment(JTextField.CENTER);
+
+        panelItems[0].add(labelTitle);
+        panelItems[1].add(labelNavigating);
+        panelItems[1].add(outputNavigatingPower);
+        panelItems[1].add(labelUnit[0]);
+        panelItems[2].add(labelWeighing);
+        panelItems[2].add(outputWeighingPower);
+        panelItems[2].add(labelUnit[1]);
+        panelItems[3].add(labelBerthing);
+        panelItems[3].add(outputBerthingPower);
+        panelItems[3].add(labelUnit[2]);
+        panelItems[4].add(labelStevedoring);
+        panelItems[4].add(outputStevedoringPower);
+        panelItems[4].add(labelUnit[3]);
+        panelItems[5].add(labelEmergency);
+        panelItems[5].add(outputEmergencyPower);
+        panelItems[5].add(labelUnit[4]);
+
+        for (int i = 0; i < 6; i++) {
+            panel.add(panelItems[i]);
+        }
+
+        return panel;
+    }
+
+    private JPanel lowerPanel() {
+        JPanel panel = new JPanel();
+        panel.setBackground(UIConstants.SUB_COLOR);
+        panel.setLayout(new FlowLayout(FlowLayout.RIGHT, 20, -1));
+
+        btnCalculate = new IconButton(UIConstants.ICON_RESULT,
+                "计算",
+                "calculate...");
+
+        panel.add(btnCalculate);
         return panel;
     }
 
@@ -289,5 +420,8 @@ public class OperatorPanel extends JPanel {
         btnEditDevice.addActionListener((e -> {
 
         }));
+
+
+
     }
 }
