@@ -1,6 +1,9 @@
 package main.java.UI;
 
 
+import main.java.Logic.DatabaseManager;
+import main.java.Logic.Operator;
+import main.java.Logic.OperatorManager;
 import main.java.UI.panels.*;
 
 import javax.swing.*;
@@ -17,15 +20,17 @@ public class AppMain {
     public static WelcomePanel welcomePanel;
     public static DatabasePanel dbPanel;
     public static OperatorPanel operatorPanel;
-    public static ResultPanel resultPanel;
+//    public static ResultPanel resultPanel;
     public static LogPanel logPanel;
     public static AboutPanel aboutPanel;
 
     public static ToolBarPanel toolBarPanel;
 
-    public static int userPrivilege;
+    public static DatabaseManager databaseManager;
+    public static OperatorManager operatorManager;
 
     private AppMain() {
+        initPanel();
 //        initLoginFrame();
         initMainFrame();
     }
@@ -71,14 +76,6 @@ public class AppMain {
         mainPanel.setBackground(Color.WHITE);
         mainPanel.setLayout(new BorderLayout());
 
-        toolBarPanel = new ToolBarPanel();
-        welcomePanel = new WelcomePanel();
-        dbPanel = new DatabasePanel();
-        operatorPanel = new OperatorPanel();
-        resultPanel = new ResultPanel();
-        logPanel = new LogPanel();
-        aboutPanel = new AboutPanel();
-
         mainPanel.add(toolBarPanel, BorderLayout.WEST); //location of toolBarPanel
 
         mainCenterPanel = new JPanel(true);
@@ -92,6 +89,20 @@ public class AppMain {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
 
+    private void initPanel() {
+        toolBarPanel = new ToolBarPanel();
+        welcomePanel = new WelcomePanel();
+        dbPanel = new DatabasePanel();
+        operatorPanel = new OperatorPanel();
+//        resultPanel = new ResultPanel();
+        logPanel = new LogPanel();
+        aboutPanel = new AboutPanel();
+    }
+
+    private void initManager() {
+        databaseManager = DatabaseManager.getInstance();
+        operatorManager = OperatorManager.getInstance();
+    }
 
     public static void main(String[] args) {
         EventQueue.invokeLater(new Runnable() {

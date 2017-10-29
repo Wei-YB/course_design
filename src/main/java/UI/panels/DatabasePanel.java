@@ -1,5 +1,6 @@
 package main.java.UI.panels;
 
+import main.java.Logic.DatabaseManager;
 import main.java.Tools.DbUtil;
 import main.java.UI.AppMain;
 import main.java.UI.IconButton;
@@ -36,7 +37,7 @@ public class DatabasePanel extends JPanel {
 
     public DatabasePanel() {
         init();
-        initDbData();
+        initDb();
         addComponent();
         addListener();
         try {
@@ -51,8 +52,16 @@ public class DatabasePanel extends JPanel {
         this.setBackground(UIConstants.MAIN_COLOR);
         this.setLayout(new BorderLayout());
 
-        dbDatas = new Vector<>();
-        dbHeads = new Vector<>();
+//        dbDatas = new Vector<>();
+//        dbHeads = new Vector<>();
+    }
+
+    private void initDb() {
+        DatabaseManager dbManager = DatabaseManager.getInstance();
+
+        dbMySQL = dbManager.getDbMySQL();
+        dbHeads = dbManager.getDbHeads();
+        dbDatas = dbManager.getDbDatas();
     }
 
     private void addComponent() {
@@ -201,56 +210,6 @@ public class DatabasePanel extends JPanel {
         }
     }
 
-    private static void initDbData() {
-        try {
-            dbMySQL = DbUtil.getInstance();
-            Connection conn = dbMySQL.getConnection();
-
-            ResultSet rs = dbMySQL.execQuery("select" +
-                    " `参数`.`序号`,`参数`.`用电设备名称`," +
-                    "`参数`.`数量`,`参数`.`机械轴功率/kW`," +
-                    "`参数`.`电机功率/kW`," +
-                    "`参数`.`电机效率/%`," +
-                    "`参数`.`利用系数K1`," +
-                    "`参数`.`设备总功率/kW`," +
-                    "`航行`.`K2`," +
-                    "`航行`.`K0`," +
-                    "`起锚`.`K2`," +
-                    "`起锚`.`K0`," +
-                    "`停泊`.`K2`," +
-                    "`停泊`.`K0`," +
-                    "`装卸货`.`K2`," +
-                    "`装卸货`.`K0`," +
-                    "`应急`.`K2`," +
-                    "`应急`.`K0`," +
-                    "`参数`.`负荷类别`," +
-                    "`参数`.`电机转速/（r/m）` from `参数`," +
-                    "`航行`,`起锚`," +
-                    "`停泊`,`装卸货`," +
-                    "`应急` where" +
-                    " `参数`.`序号`=`航行`.`序号` and" +
-                    " `参数`.`序号`=`起锚`.`序号` and" +
-                    " `参数`.`序号`=`停泊`.`序号` and " +
-                    "`参数`.`序号`=`装卸货`.`序号` and " +
-                    "`参数`.`序号`=`应急`.`序号`;");
-
-            ResultSetMetaData rsmd = rs.getMetaData();
-
-            for (int i = 1; i <= rsmd.getColumnCount(); i++) {
-                dbHeads.add(rsmd.getColumnName(i));
-            }
-
-            while (rs.next()) {
-                Vector<Object> obj = new Vector<>();
-                for (int i = 1; i <= rsmd.getColumnCount(); i++) {
-                    obj.add(rs.getObject(i));
-                }
-                dbDatas.add(obj);
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
 
     private void addListener() {
         btnPrint.addActionListener((e) -> {

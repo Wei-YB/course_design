@@ -169,8 +169,8 @@ public class LoginFrame extends JFrame {
                     case 1:
                         System.out.println("Login successfully");
 
-                        AppMain.userPrivilege = rs.getInt("privilege");
-//                            System.out.println(AppMain.userPrivilege);
+//                        AppMain.userPrivilege = rs.getInt("privilege");
+
                         AppMain app = AppMain.getInstance();
                         app.switchFrame();
                         break;

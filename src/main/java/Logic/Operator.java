@@ -1,20 +1,19 @@
 package main.java.Logic;
 
+import main.java.UI.AppMain;
+
+import java.lang.reflect.Method;
+
 public class Operator {
-
-    private String deviceName;
-    private String generatorRevSpeed;
-
-    private int number;
-
-    private float shaftPower;
-    private float generatorPower;
-    private float generatorEfficiency;
-    private float factorK1;
 
     public Operator() {
 
     }
 
-//    public void
+//    public static void main(String[] args) {
+//        Device d = new Device();
+//
+//        AppMain.setter(d, "FactorK2", 0, 2, int.class, float.class);
+//        AppMain.setter(d, "DeviceName", "gag", String.class);
+//    }
 }

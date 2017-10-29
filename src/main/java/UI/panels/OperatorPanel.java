@@ -27,12 +27,6 @@ public class OperatorPanel extends JPanel {
     private JTextField inputUtilizationFactor;
     private JTextField inputMotorRevSpeed;
 
-    private JTextField outputNavigatingPower;
-    private JTextField outputWeighingPower;
-    private JTextField outputBerthingPower;
-    private JTextField outputStevedoringPower;
-    private JTextField outputEmergencyPower;
-
     private JPanel[] panelItems;
 
     private IconButton btnCalculate;
@@ -324,11 +318,13 @@ public class OperatorPanel extends JPanel {
 
 
         JLabel labelTitle = new JLabel("Result");
-        JLabel labelNavigating = new JLabel("航行所需总功率:    ");
-        JLabel labelWeighing = new JLabel("起锚所需总功率:    ");
-        JLabel labelBerthing = new JLabel("停泊所需总功率:    ");
-        JLabel labelStevedoring = new JLabel("装卸货所需总功率: ");
-        JLabel labelEmergency = new JLabel("应急所需总功率:    ");
+
+        JLabel[] labelEachStatusPower = new JLabel[5];
+        labelEachStatusPower[0] = new JLabel("航行所需总功率:    ");
+        labelEachStatusPower[1] = new JLabel("起锚所需总功率:    ");
+        labelEachStatusPower[2] = new JLabel("停泊所需总功率:    ");
+        labelEachStatusPower[3] = new JLabel("装卸货所需总功率: ");
+        labelEachStatusPower[4] = new JLabel("应急所需总功率:    ");
 
         JLabel[] labelUnit = new JLabel[5];
 
@@ -339,46 +335,19 @@ public class OperatorPanel extends JPanel {
 
         labelTitle.setFont(new Font("font", Font.BOLD, 20));
 
-        outputNavigatingPower = new JTextField();
-        outputWeighingPower = new JTextField();
-        outputBerthingPower = new JTextField();
-        outputStevedoringPower = new JTextField();
-        outputEmergencyPower = new JTextField();
-
-        outputNavigatingPower.setEditable(false);
-        outputWeighingPower.setEditable(false);
-        outputBerthingPower.setEditable(false);
-        outputStevedoringPower.setEditable(false);
-        outputEmergencyPower.setEditable(false);
-
-        outputNavigatingPower.setPreferredSize(new Dimension(70, 30));
-        outputWeighingPower.setPreferredSize(new Dimension(70, 30));
-        outputBerthingPower.setPreferredSize(new Dimension(70, 30));
-        outputStevedoringPower.setPreferredSize(new Dimension(70, 30));
-        outputEmergencyPower.setPreferredSize(new Dimension(70, 30));
-
-        outputNavigatingPower.setHorizontalAlignment(JTextField.CENTER);
-        outputWeighingPower.setHorizontalAlignment(JTextField.CENTER);
-        outputBerthingPower.setHorizontalAlignment(JTextField.CENTER);
-        outputStevedoringPower.setHorizontalAlignment(JTextField.CENTER);
-        outputEmergencyPower.setHorizontalAlignment(JTextField.CENTER);
+        JTextField[] outputTextField = new JTextField[5];
 
         panelItems[0].add(labelTitle);
-        panelItems[1].add(labelNavigating);
-        panelItems[1].add(outputNavigatingPower);
-        panelItems[1].add(labelUnit[0]);
-        panelItems[2].add(labelWeighing);
-        panelItems[2].add(outputWeighingPower);
-        panelItems[2].add(labelUnit[1]);
-        panelItems[3].add(labelBerthing);
-        panelItems[3].add(outputBerthingPower);
-        panelItems[3].add(labelUnit[2]);
-        panelItems[4].add(labelStevedoring);
-        panelItems[4].add(outputStevedoringPower);
-        panelItems[4].add(labelUnit[3]);
-        panelItems[5].add(labelEmergency);
-        panelItems[5].add(outputEmergencyPower);
-        panelItems[5].add(labelUnit[4]);
+
+        for (int i = 0; i < 5; i++) {
+            outputTextField[i] = new JTextField();
+            outputTextField[i].setEditable(false);
+            outputTextField[i].setPreferredSize(new Dimension(70, 30));
+            outputTextField[i].setHorizontalAlignment(JTextField.CENTER);
+            panelItems[i + 1].add(labelEachStatusPower[i]);
+            panelItems[i + 1].add(outputTextField[i]);
+            panelItems[i + 1].add(labelUnit[i]);
+        }
 
         for (int i = 0; i < 6; i++) {
             panel.add(panelItems[i]);
