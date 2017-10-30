@@ -156,16 +156,16 @@ public class DatabaseManager {
                                 obj = 1;
                                 break;
                             case 6:
-                                obj = 100.0f;
+                                obj = 100.000001f;
                                 break;
                             case 4: case 5: case 7: case 8:
-                                obj = 1.0f;
+                                obj = 1.000001f;
                                 break;
                             case 20:
                                 obj = "";
                                 break;
                             default:
-                                obj = 0.0f;
+                                obj = 0.000001f;
                         }
                     }
                     if (i >= 9 && i <= 18) {

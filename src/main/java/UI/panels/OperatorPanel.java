@@ -180,9 +180,9 @@ public class OperatorPanel extends JPanel {
                         "([0-9]\\.[0-9][0-9])|([1-9][0-9])|([1-9][0-9]\\.)|" +
                         "([1-9][0-9]\\.[0-9])|([1-9][0-9]\\.[0-9][0-9]))$"));
         inputUtilizationFactor.setDocument(new RegExpForTextField(
-                "^((1)|(0)|(0\\.)|(0\\.[0-9])|(0\\.[0-9][1-9])|(0\\.[1-9][0-9]))$"));
+                "^((1)|(1\\.)|(1\\.0)|(0)|(0\\.)|(0\\.[0-9])|(0\\.[0-9][1-9])|(0\\.[1-9][0-9]))$"));
         inputMotorRevSpeed.setDocument(new RegExpForTextField(
-                "^(([1-9])|([1-9][0-9])|([1-9][0-9][0-9]|([1-2][0-9][0-9][0-9])|(3000)))$"));
+                "^[0-9/]+$"));
 
         inputShaftPower.setHorizontalAlignment(JTextField.CENTER);
         inputMotorPower.setHorizontalAlignment(JTextField.CENTER);
@@ -267,9 +267,9 @@ public class OperatorPanel extends JPanel {
         inputMachineLoadFactorK2.setPreferredSize(new Dimension(60, 30));
 
         inputCoincidenceFactorK0.setDocument(new RegExpForTextField(
-                "^((1)|(0)|(0\\.)|(0\\.[0-9])|(0\\.[0-9][1-9])|(0\\.[1-9][0-9]))$"));
+                "^((1)|(1\\.)|(1\\.0)|(0)|(0\\.)|(0\\.[0-9])|(0\\.[0-9][1-9])|(0\\.[1-9][0-9]))$"));
         inputMachineLoadFactorK2.setDocument(new RegExpForTextField(
-                "^((1)|(0)|(0\\.)|(0\\.[0-9])|(0\\.[0-9][1-9])|(0\\.[1-9][0-9]))$"));
+                "^((1)|(1\\.)|(1\\.0)|(0)|(0\\.)|(0\\.[0-9])|(0\\.[0-9][1-9])|(0\\.[1-9][0-9]))$"));
 
         inputCoincidenceFactorK0.addFocusListener(new FocusAdapter() {
             @Override
@@ -385,46 +385,138 @@ public class OperatorPanel extends JPanel {
         }
     }
 
-    private void updateDataDisplay(Device device) {
+    public void updateDataDisplay(int row) {
+
+        Device device = DatabaseManager.getInstance().devices.get(row);
 
         inputDeviceName.setText((String)OperatorManager.getter(device, "DeviceName"));
         inputDeviceNumber.setText(String.valueOf((int)OperatorManager.getter(device, "Number")));
-        inputShaftPower.setText(String.valueOf((float)OperatorManager.getter(device, "ShaftPower")));
-        inputMotorPower.setText(String.valueOf((float)OperatorManager.getter(device, "MotorPower")));
-        inputDevicesPower.setText(String.valueOf((float)OperatorManager.getter(device, "DevicesPower")));
-        inputMotorEfficiency.setText(String.valueOf((float)OperatorManager.getter(device, "MotorEfficiency")));
-        inputUtilizationFactor.setText(String.valueOf((float)OperatorManager.getter(device, "FactorK1")));
-        inputMotorRevSpeed.setText((String)OperatorManager.getter(device, "MotorRevSpeed"));
+
+        inputShaftPower.setText(getObjectNotNull(OperatorManager.getter(device, "ShaftPower")));
+        inputMotorPower.setText(getObjectNotNull(OperatorManager.getter(device, "MotorPower")));
+        inputDevicesPower.setText(getObjectNotNull(OperatorManager.getter(device, "DevicesPower")));
+        inputMotorEfficiency.setText(getObjectNotNull(OperatorManager.getter(device, "MotorEfficiency")));
+        inputUtilizationFactor.setText(getObjectNotNull(OperatorManager.getter(device, "FactorK1")));
+        inputMotorRevSpeed.setText(getObjectNotNull(OperatorManager.getter(device, "MotorRevSpeed")));
+
 
         for (int i = 0; i < 5; i++) {
-            ((JTextField)((JPanel)panelItems[3].getComponent(i)).getComponent(2))
-                    .setText(String.valueOf((float)OperatorManager.getter(device, "FactorK2", i, int.class)));
+            ((JTextField)((JPanel)((JPanel)panelItems[3].getComponent(i)).getComponent(1)).getComponent(1))
+                    .setText(getObjectNotNull(OperatorManager.getter(device, "FactorK2", i, int.class)));
 
-            ((JTextField)((JPanel)panelItems[3].getComponent(i)).getComponent(4))
-                    .setText(String.valueOf((float)OperatorManager.getter(device, "FactorK0", i, int.class)));
+            ((JTextField)((JPanel)((JPanel)panelItems[3].getComponent(i)).getComponent(2)).getComponent(1))
+                    .setText(getObjectNotNull(OperatorManager.getter(device, "FactorK0", i, int.class)));
 
-//            int index = 0;
-//            switch ((String)OperatorManager.getter(device, "LoadType")) {
-//                case "I":
-//                    index = 0;
-//                    break;
-//                case "II":
-//                    index = 1;
-//                    break;
-//                case "III":
-//                    index = 2;
-//                    break;
-//            }
+            int index = 0;
+            switch ((String)OperatorManager.getter(device, "LoadType")) {
+                case "I":
+                    index = 0;
+                    break;
+                case "II":
+                    index = 1;
+                    break;
+                case "III":
+                    index = 2;
+                    break;
+            }
 
-//            ((JComboBox<String>)((JPanel)panelItems[3].getComponent(i)).getComponent(6))
-//                    .setSelectedIndex(index);
+            ((JComboBox<String>)((JPanel)((JPanel)panelItems[3].getComponent(i)).getComponent(3)).getComponent(1))
+                    .setSelectedIndex(index);
         }
+    }
+
+    private String getObjectNotNull(Object obj) {
+        if (obj.getClass() == String.class) {
+            if (obj == "") {
+                return "";
+            }
+            return obj.toString();
+        }
+        if (obj.getClass() == float.class) {
+            if ((float)obj == 1.000001f || (float)obj == 100.000001f || (float)obj == 0.000001f) {
+                return "";
+            }
+            return obj.toString();
+        }
+        return obj.toString();
+    }
+
+    private boolean setDataErrorHandler(JTextField obj, String errMsg) {
+        if (obj.getText().equals("")) {
+            JOptionPane.showMessageDialog(
+                    null,
+                    errMsg,
+                    "Error Message",
+                    JOptionPane.ERROR_MESSAGE);
+            return true;
+        }
+        return false;
     }
 
     private void addListener() {
 
         btnAddDevice.addActionListener((e) -> {
-            updateDataDisplay(DatabaseManager.getInstance().devices.get(1));
+            Device device = new Device();
+
+            if (setDataErrorHandler(inputDeviceName, "请输入设备名称")) { return; }
+            device.setDeviceName(inputDeviceName.getText());
+
+            if (setDataErrorHandler(inputDeviceNumber, "请输入设备数量")) { return; }
+            device.setNumber(Integer.parseInt(inputDeviceNumber.getText()));
+
+            if (inputShaftPower.getText().equals("")) {
+                device.setShaftPower(1.000001f);
+                return;
+            }
+            device.setShaftPower(Float.parseFloat(inputShaftPower.getText()));
+
+            if (inputUtilizationFactor.getText().equals("") && inputMotorPower.getText().equals("") &&
+                    inputMotorEfficiency.getText().equals("")) {
+                if (!inputDevicesPower.getText().equals("")) {
+                    device.setFactorK1(1.000001f);
+                    device.setMotorPower(1.000001f);
+                    device.setMotorEfficiency(100.000001f);
+                    device.setDevicesPower(Float.parseFloat(inputDevicesPower.getText()));
+                } else {
+                    JOptionPane.showMessageDialog(
+                            null,
+                            "请输入＂设备总功率＂一项＂或电机功率＂,＂电机效率＂,＂利用系数＂三项",
+                            "Error Message",
+                            JOptionPane.ERROR_MESSAGE);
+                    return;
+                }
+            } else if (inputDevicesPower.getText().equals("")) {
+                if (!inputUtilizationFactor.getText().equals("") && !inputMotorPower.getText().equals("") &&
+                        !inputMotorEfficiency.getText().equals("")) {
+                    device.setFactorK1(Float.parseFloat(inputUtilizationFactor.getText()));
+                    device.setMotorPower(Float.parseFloat(inputMotorPower.getText()));
+                    device.setMotorEfficiency(Float.parseFloat(inputMotorEfficiency.getText()));
+                    device.setDevicesPower(1.000001f);
+                } else {
+                    JOptionPane.showMessageDialog(
+                            null,
+                            "请输入＂设备总功率＂一项＂或电机功率＂,＂电机效率＂,＂利用系数＂三项",
+                            "Error Message",
+                            JOptionPane.ERROR_MESSAGE);
+                    return;
+                }
+            } else {
+                JOptionPane.showMessageDialog(
+                        null,
+                        "请输入＂设备总功率＂一项＂或电机功率＂,＂电机效率＂,＂利用系数＂三项",
+                        "Error Message",
+                        JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+
+            if (inputMotorRevSpeed.getText().equals("")) {
+                device.setMotorRevSpeed("");
+                return;
+            }
+            device.setMotorRevSpeed(inputMotorRevSpeed.getText());
+
+            System.out.println(device);
+
         });
 
         btnEditDevice.addActionListener((e) -> {

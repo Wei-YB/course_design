@@ -32,10 +32,33 @@ public class Operator {
             result *= (int)OperatorManager.getter(device, "Number");
             switch ((String)OperatorManager.getter(device, "LoadType")) {
                 case "I":
-                    result *= 0.9f;
+                    switch (status) {
+                        case 0:
+                            result *= 0.75f;
+                            break;
+                        case 1:
+                            result *= 0.68f;
+                            break;
+                        case 2:
+                            result *= 0.65f;
+                            break;
+                        case 3:
+                            result *= 0.85f;
+                            break;
+                        case 4:
+                            result *= 1.0f;
+                            break;
+                    }
                     break;
                 case "II":
-                    result *= 0.65f;
+                    switch (status) {
+                        case 0: case 1: case 2: case 3:
+                            result *= 0.3f;
+                            break;
+                        case 4:
+                            result *= 1.0f;
+                            break;
+                    }
                     break;
                 case "III":
                     result *= 1.0f;

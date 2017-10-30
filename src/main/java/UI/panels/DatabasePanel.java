@@ -234,6 +234,7 @@ public class DatabasePanel extends JPanel {
                     AppMain.toolBarPanel.setCurActivatedBtn(AppMain.toolBarPanel.getButton("Operator"));
 
                     int row = ((JTable)e.getSource()).rowAtPoint(e.getPoint());
+                    AppMain.operatorPanel.updateDataDisplay(row);
 
                     AppMain app = AppMain.getInstance();
                     app.switchPanel(AppMain.operatorPanel);

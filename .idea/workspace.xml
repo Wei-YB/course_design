@@ -5,24 +5,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ff577bef-f3b5-415c-a498-cf2642286336" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/poi_3_17.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/poi_ooxml_3_17.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/poi_ooxml_schemas_3_17.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/xmlbeans_2_6_0.xml" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/Logic/Result.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/Tools/Logger.java" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/course-design/main/java/UI/panels/DatabasePanel.class" afterPath="$PROJECT_DIR$/out/production/course-design/main/java/UI/panels/DatabasePanel.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/course-design/main/java/UI/panels/OperatorPanel.class" afterPath="$PROJECT_DIR$/out/production/course-design/main/java/UI/panels/OperatorPanel.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/course-design/main/java/UI/panels/ToolBarPanel.class" afterPath="$PROJECT_DIR$/out/production/course-design/main/java/UI/panels/ToolBarPanel.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/course-design.iml" afterPath="$PROJECT_DIR$/course-design.iml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/Logic/DatabaseManager.java" afterPath="$PROJECT_DIR$/src/main/java/Logic/DatabaseManager.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/Logic/Operator.java" afterPath="$PROJECT_DIR$/src/main/java/Logic/Operator.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/Logic/OperatorManager.java" afterPath="$PROJECT_DIR$/src/main/java/Logic/OperatorManager.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/Logic/bean/Device.java" afterPath="$PROJECT_DIR$/src/main/java/Logic/bean/Device.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/UI/panels/DatabasePanel.java" afterPath="$PROJECT_DIR$/src/main/java/UI/panels/DatabasePanel.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/UI/panels/OperatorPanel.java" afterPath="$PROJECT_DIR$/src/main/java/UI/panels/OperatorPanel.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/UI/panels/ToolBarPanel.java" afterPath="$PROJECT_DIR$/src/main/java/UI/panels/ToolBarPanel.java" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -37,10 +26,12 @@
       <file leaf-file-name="DatabasePanel.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/UI/panels/DatabasePanel.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="997">
-              <caret line="232" column="0" lean-forward="true" selection-start-line="232" selection-start-column="0" selection-end-line="232" selection-end-column="0" />
+            <state relative-caret-position="1031">
+              <caret line="230" column="62" lean-forward="true" selection-start-line="230" selection-start-column="62" selection-end-line="230" selection-end-column="62" />
               <folding>
                 <element signature="imports" expanded="true" />
+                <element signature="e#7462#8338#0" expanded="true" />
+                <element signature="e#8337#8338#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -49,8 +40,8 @@
       <file leaf-file-name="DatabaseManager.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/Logic/DatabaseManager.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-421">
-              <caret line="164" column="41" lean-forward="true" selection-start-line="164" selection-start-column="41" selection-end-line="164" selection-end-column="41" />
+            <state relative-caret-position="241">
+              <caret line="197" column="39" lean-forward="true" selection-start-line="197" selection-start-column="39" selection-end-line="197" selection-end-column="39" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -58,21 +49,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Operator.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/Logic/Operator.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="119">
-              <caret line="20" column="43" lean-forward="true" selection-start-line="20" selection-start-column="43" selection-end-line="20" selection-end-column="43" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="OperatorPanel.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/UI/panels/OperatorPanel.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="963">
-              <caret line="422" column="0" lean-forward="true" selection-start-line="422" selection-start-column="0" selection-end-line="422" selection-end-column="0" />
+            <state relative-caret-position="251">
+              <caret line="272" column="0" lean-forward="true" selection-start-line="272" selection-start-column="0" selection-end-line="272" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -81,7 +62,7 @@
       <file leaf-file-name="OperatorManager.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/Logic/OperatorManager.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="199">
+            <state relative-caret-position="612">
               <caret line="51" column="25" lean-forward="false" selection-start-line="51" selection-start-column="25" selection-end-line="51" selection-end-column="25" />
               <folding />
             </state>
@@ -91,8 +72,8 @@
       <file leaf-file-name="Device.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/Logic/bean/Device.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="300">
-              <caret line="43" column="0" lean-forward="true" selection-start-line="43" selection-start-column="0" selection-end-line="43" selection-end-column="0" />
+            <state relative-caret-position="-244">
+              <caret line="44" column="65" lean-forward="false" selection-start-line="44" selection-start-column="65" selection-end-line="44" selection-end-column="65" />
               <folding />
             </state>
           </provider>
@@ -115,6 +96,7 @@
       <find>Generator</find>
       <find>GP</find>
       <find>float</find>
+      <find>Fac</find>
     </findStrings>
     <replaceStrings>
       <replace>Motor</replace>
@@ -161,8 +143,8 @@
         <option value="$PROJECT_DIR$/src/main/java/Tools/DbUtil.java" />
         <option value="$PROJECT_DIR$/src/main/java/Logic/OperatorManager.java" />
         <option value="$PROJECT_DIR$/src/main/java/Logic/Operator.java" />
-        <option value="$PROJECT_DIR$/src/main/java/Logic/DatabaseManager.java" />
         <option value="$PROJECT_DIR$/src/main/java/UI/panels/DatabasePanel.java" />
+        <option value="$PROJECT_DIR$/src/main/java/Logic/DatabaseManager.java" />
         <option value="$PROJECT_DIR$/src/main/java/UI/panels/OperatorPanel.java" />
       </list>
     </option>
@@ -197,10 +179,9 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scratches" />
-      <pane id="AndroidView" />
       <pane id="PackagesPane" />
       <pane id="Scope" />
+      <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -267,6 +248,7 @@
           <select />
         </subPane>
       </pane>
+      <pane id="AndroidView" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -281,6 +263,7 @@
     <property name="Repository.Attach.Sources" value="false" />
     <property name="last_opened_file_path" value="$USER_HOME$/poi-3.17/ooxml-lib/xmlbeans-2.6.0.jar!/" />
     <property name="findjar.last.used.dir" value="$PROJECT_DIR$" />
+    <property name="settings.editor.selected.configurable" value="vcs.Git" />
   </component>
   <component name="RecentsManager">
     <key name="CopyClassDialog.RECENTS_KEY">
@@ -477,26 +460,28 @@
       <workItem from="1509260565595" duration="2944000" />
       <workItem from="1509264541441" duration="11000" />
       <workItem from="1509264570042" duration="2253000" />
-      <workItem from="1509267116611" duration="27445000" />
+      <workItem from="1509267116611" duration="28601000" />
+      <workItem from="1509326774958" duration="341000" />
+      <workItem from="1509328616497" duration="7040000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="139410000" />
+    <option name="totallyTimeSpent" value="147947000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="262" y="350" width="1922" height="1034" extended-state="6" />
+    <frame x="262" y="350" width="1920" height="1030" extended-state="6" />
     <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32867885" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32829374" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32975295" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32829374" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32975295" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
@@ -507,8 +492,8 @@
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.39957035" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="true" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.39956802" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -525,18 +510,25 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="17" />
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/UI/panels/OperatorPanel.java</url>
+          <line>403</line>
+          <properties />
+          <option name="timeStamp" value="19" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/UI/panels/OperatorPanel.java</url>
+          <line>517</line>
+          <properties />
+          <option name="timeStamp" value="21" />
+        </line-breakpoint>
+      </breakpoints>
+      <option name="time" value="22" />
     </breakpoint-manager>
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="jar:///usr/lib/jvm/default-runtime/lib/src.zip!/java.desktop/java/awt/Font.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="199">
-          <caret line="298" column="31" lean-forward="false" selection-start-line="298" selection-start-column="31" selection-end-line="298" selection-end-column="31" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/UI/panels/MyPanel.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="102">
@@ -687,13 +679,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="jar:///usr/lib/jvm/default-runtime/lib/src.zip!/java.desktop/java/awt/Container.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="301">
-          <caret line="338" column="21" lean-forward="false" selection-start-line="338" selection-start-column="21" selection-end-line="338" selection-end-column="21" />
-        </state>
-      </provider>
-    </entry>
     <entry file="jar:///usr/lib/jvm/default-runtime/lib/src.zip!/java.base/java/lang/Object.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="811">
@@ -715,26 +700,11 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="216">
           <caret line="122" column="15" lean-forward="false" selection-start-line="122" selection-start-column="15" selection-end-line="122" selection-end-column="15" />
-          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/Tools/Logger.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="34">
-          <caret line="2" column="13" lean-forward="false" selection-start-line="2" selection-start-column="13" selection-end-line="2" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/Logic/Result.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="34">
-          <caret line="2" column="19" lean-forward="false" selection-start-line="2" selection-start-column="19" selection-end-line="2" selection-end-column="19" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/Tools/Logger.java" />
+    <entry file="file://$PROJECT_DIR$/src/main/java/Logic/Result.java" />
     <entry file="file://$PROJECT_DIR$/src/main/java/UI/panels/ToolBarPanel.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="521">
@@ -757,7 +727,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="442">
           <caret line="31" column="0" lean-forward="false" selection-start-line="31" selection-start-column="0" selection-end-line="31" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -765,10 +734,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="159">
           <caret line="1497" column="0" lean-forward="false" selection-start-line="1497" selection-start-column="0" selection-end-line="1497" selection-end-column="0" />
-          <folding>
-            <element signature="e#18894#18895#0" expanded="true" />
-            <element signature="e#18946#18947#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -776,7 +741,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="306">
           <caret line="25" column="0" lean-forward="false" selection-start-line="25" selection-start-column="0" selection-end-line="25" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -784,7 +748,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="913">
           <caret line="202" column="50" lean-forward="true" selection-start-line="202" selection-start-column="50" selection-end-line="202" selection-end-column="50" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -792,7 +755,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="199">
           <caret line="2666" column="15" lean-forward="false" selection-start-line="2666" selection-start-column="15" selection-end-line="2666" selection-end-column="15" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -800,7 +762,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-617">
           <caret line="98" column="17" lean-forward="false" selection-start-line="98" selection-start-column="17" selection-end-line="98" selection-end-column="17" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -824,7 +785,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="177">
           <caret line="1129" column="16" lean-forward="false" selection-start-line="1129" selection-start-column="16" selection-end-line="1129" selection-end-column="16" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -832,7 +792,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="102">
           <caret line="23" column="19" lean-forward="false" selection-start-line="23" selection-start-column="19" selection-end-line="23" selection-end-column="19" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -844,19 +803,60 @@
         </state>
       </provider>
     </entry>
+    <entry file="jar:///usr/lib/jvm/default-runtime/lib/src.zip!/java.desktop/javax/swing/JComboBox.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="250">
+          <caret line="615" column="16" lean-forward="false" selection-start-line="615" selection-start-column="16" selection-end-line="615" selection-end-column="16" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/Logic/Operator.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="80">
+          <caret line="33" column="25" lean-forward="true" selection-start-line="33" selection-start-column="25" selection-end-line="33" selection-end-column="25" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar:///usr/lib/jvm/default-runtime/lib/src.zip!/java.desktop/java/awt/Container.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="300">
+          <caret line="338" column="21" lean-forward="false" selection-start-line="338" selection-start-column="21" selection-end-line="338" selection-end-column="21" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar:///usr/lib/jvm/default-runtime/lib/src.zip!/java.desktop/javax/swing/text/JTextComponent.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="198">
+          <caret line="1747" column="18" lean-forward="false" selection-start-line="1747" selection-start-column="18" selection-end-line="1747" selection-end-column="18" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/UI/panels/DatabasePanel.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="997">
-          <caret line="232" column="0" lean-forward="true" selection-start-line="232" selection-start-column="0" selection-end-line="232" selection-end-column="0" />
+        <state relative-caret-position="1031">
+          <caret line="230" column="62" lean-forward="true" selection-start-line="230" selection-start-column="62" selection-end-line="230" selection-end-column="62" />
           <folding>
             <element signature="imports" expanded="true" />
+            <element signature="e#7462#8338#0" expanded="true" />
+            <element signature="e#8337#8338#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/Logic/bean/Device.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-244">
+          <caret line="44" column="65" lean-forward="false" selection-start-line="44" selection-start-column="65" selection-end-line="44" selection-end-column="65" />
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/Logic/OperatorManager.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="199">
+        <state relative-caret-position="612">
           <caret line="51" column="25" lean-forward="false" selection-start-line="51" selection-start-column="25" selection-end-line="51" selection-end-column="25" />
           <folding />
         </state>
@@ -864,42 +864,18 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/Logic/DatabaseManager.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-421">
-          <caret line="164" column="41" lean-forward="true" selection-start-line="164" selection-start-column="41" selection-end-line="164" selection-end-column="41" />
+        <state relative-caret-position="241">
+          <caret line="197" column="39" lean-forward="true" selection-start-line="197" selection-start-column="39" selection-end-line="197" selection-end-column="39" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="jar:///usr/lib/jvm/default-runtime/lib/src.zip!/java.desktop/javax/swing/JComboBox.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="250">
-          <caret line="615" column="16" lean-forward="false" selection-start-line="615" selection-start-column="16" selection-end-line="615" selection-end-column="16" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/Logic/Operator.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="119">
-          <caret line="20" column="43" lean-forward="true" selection-start-line="20" selection-start-column="43" selection-end-line="20" selection-end-column="43" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/Logic/bean/Device.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="300">
-          <caret line="43" column="0" lean-forward="true" selection-start-line="43" selection-start-column="0" selection-end-line="43" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/UI/panels/OperatorPanel.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="963">
-          <caret line="422" column="0" lean-forward="true" selection-start-line="422" selection-start-column="0" selection-end-line="422" selection-end-column="0" />
+        <state relative-caret-position="251">
+          <caret line="272" column="0" lean-forward="true" selection-start-line="272" selection-start-column="0" selection-end-line="272" selection-end-column="0" />
           <folding />
         </state>
       </provider>
