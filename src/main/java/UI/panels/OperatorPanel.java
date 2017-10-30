@@ -5,6 +5,7 @@ import main.java.Logic.Operator;
 import main.java.Logic.OperatorManager;
 import main.java.Logic.bean.Device;
 import main.java.Tools.RegExpForTextField;
+import main.java.UI.AppMain;
 import main.java.UI.IconButton;
 import main.java.UI.UIConstants;
 
@@ -406,10 +407,10 @@ public class OperatorPanel extends JPanel {
 
 
         for (int i = 0; i < 5; i++) {
-            ((JTextField)((JPanel)((JPanel)panelItems[3].getComponent(i)).getComponent(1)).getComponent(1))
+            ((JTextField)((JPanel)((JPanel)panelItems[3].getComponent(i)).getComponent(2)).getComponent(1))
                     .setText(getObjectNotNull(OperatorManager.getter(device, "FactorK2", i, int.class)));
 
-            ((JTextField)((JPanel)((JPanel)panelItems[3].getComponent(i)).getComponent(2)).getComponent(1))
+            ((JTextField)((JPanel)((JPanel)panelItems[3].getComponent(i)).getComponent(1)).getComponent(1))
                     .setText(getObjectNotNull(OperatorManager.getter(device, "FactorK0", i, int.class)));
 
             int index = 0;
@@ -523,11 +524,11 @@ public class OperatorPanel extends JPanel {
             for (int i = 0; i < 5; i++) {
 
                 String k2 = ((JTextField)((JPanel)((JPanel)panelItems[3].
-                        getComponent(i)).getComponent(1)).getComponent(1)).
+                        getComponent(i)).getComponent(2)).getComponent(1)).
                         getText();
 
                 String k0 = ((JTextField)((JPanel)((JPanel)panelItems[3].
-                        getComponent(i)).getComponent(2)).getComponent(1)).
+                        getComponent(i)).getComponent(1)).getComponent(1)).
                         getText();
 
                 if (k2.equals("")) {
@@ -545,7 +546,8 @@ public class OperatorPanel extends JPanel {
                         getComponent(i)).getComponent(3)).getComponent(1)).getSelectedItem().toString());
             }
 
-            System.out.println(device);
+            AppMain.databaseManager.insertDevice(device);
+//            System.out.println(device);
 
         });
 

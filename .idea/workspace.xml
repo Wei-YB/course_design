@@ -5,8 +5,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ff577bef-f3b5-415c-a498-cf2642286336" name="Default" comment="">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/course-design/main/java/UI/AppMain$1.class" afterPath="$PROJECT_DIR$/out/production/course-design/main/java/UI/AppMain$1.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/course-design/main/java/UI/AppMain.class" afterPath="$PROJECT_DIR$/out/production/course-design/main/java/UI/AppMain.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/course-design/main/java/UI/panels/OperatorPanel.class" afterPath="$PROJECT_DIR$/out/production/course-design/main/java/UI/panels/OperatorPanel.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/Logic/DatabaseManager.java" afterPath="$PROJECT_DIR$/src/main/java/Logic/DatabaseManager.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/UI/AppMain.java" afterPath="$PROJECT_DIR$/src/main/java/UI/AppMain.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/UI/panels/OperatorPanel.java" afterPath="$PROJECT_DIR$/src/main/java/UI/panels/OperatorPanel.java" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
@@ -33,11 +37,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="DatabaseManager.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="DatabaseManager.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/Logic/DatabaseManager.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="241">
-              <caret line="197" column="39" lean-forward="true" selection-start-line="197" selection-start-column="39" selection-end-line="197" selection-end-column="39" />
+            <state relative-caret-position="332">
+              <caret line="252" column="45" lean-forward="true" selection-start-line="252" selection-start-column="45" selection-end-line="252" selection-end-column="45" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -45,14 +49,24 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="OperatorPanel.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="DbUtil.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/Tools/DbUtil.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="266">
+              <caret line="79" column="0" lean-forward="false" selection-start-line="79" selection-start-column="0" selection-end-line="79" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="OperatorPanel.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/UI/panels/OperatorPanel.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="282">
-              <caret line="542" column="0" lean-forward="true" selection-start-line="542" selection-start-column="0" selection-end-line="542" selection-end-column="0" />
+            <state relative-caret-position="360">
+              <caret line="548" column="57" lean-forward="true" selection-start-line="548" selection-start-column="57" selection-end-line="548" selection-end-column="57" />
               <folding>
-                <element signature="e#10895#11165#0" expanded="true" />
-                <element signature="e#11164#11165#0" expanded="true" />
+                <element signature="e#10924#11194#0" expanded="true" />
+                <element signature="e#11193#11194#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -61,7 +75,7 @@
       <file leaf-file-name="OperatorManager.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/Logic/OperatorManager.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="612">
+            <state relative-caret-position="510">
               <caret line="51" column="25" lean-forward="false" selection-start-line="51" selection-start-column="25" selection-end-line="51" selection-end-column="25" />
               <folding />
             </state>
@@ -71,8 +85,8 @@
       <file leaf-file-name="Device.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/Logic/bean/Device.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-244">
-              <caret line="44" column="65" lean-forward="false" selection-start-line="44" selection-start-column="65" selection-end-line="44" selection-end-column="65" />
+            <state relative-caret-position="470">
+              <caret line="56" column="38" lean-forward="false" selection-start-line="56" selection-start-column="38" selection-end-line="56" selection-end-column="38" />
               <folding />
             </state>
           </provider>
@@ -136,15 +150,15 @@
         <option value="$PROJECT_DIR$/src/main/java/UI/UIConstants.java" />
         <option value="$PROJECT_DIR$/src/main/java/Logic/Device.java" />
         <option value="$PROJECT_DIR$/src/main/java/UI/LoginFrame.java" />
-        <option value="$PROJECT_DIR$/src/main/java/UI/AppMain.java" />
         <option value="$PROJECT_DIR$/src/main/java/UI/panels/ToolBarPanel.java" />
-        <option value="$PROJECT_DIR$/src/main/java/Logic/bean/Device.java" />
         <option value="$PROJECT_DIR$/src/main/java/Tools/DbUtil.java" />
         <option value="$PROJECT_DIR$/src/main/java/Logic/OperatorManager.java" />
         <option value="$PROJECT_DIR$/src/main/java/Logic/Operator.java" />
         <option value="$PROJECT_DIR$/src/main/java/UI/panels/DatabasePanel.java" />
-        <option value="$PROJECT_DIR$/src/main/java/Logic/DatabaseManager.java" />
+        <option value="$PROJECT_DIR$/src/main/java/Logic/bean/Device.java" />
+        <option value="$PROJECT_DIR$/src/main/java/UI/AppMain.java" />
         <option value="$PROJECT_DIR$/src/main/java/UI/panels/OperatorPanel.java" />
+        <option value="$PROJECT_DIR$/src/main/java/Logic/DatabaseManager.java" />
       </list>
     </option>
   </component>
@@ -461,12 +475,12 @@
       <workItem from="1509264570042" duration="2253000" />
       <workItem from="1509267116611" duration="28601000" />
       <workItem from="1509326774958" duration="341000" />
-      <workItem from="1509328616497" duration="9166000" />
+      <workItem from="1509328616497" duration="13436000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="150073000" />
+    <option name="totallyTimeSpent" value="154343000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="262" y="350" width="1920" height="1030" extended-state="6" />
@@ -511,27 +525,23 @@
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/UI/panels/OperatorPanel.java</url>
-          <line>547</line>
+          <url>file://$PROJECT_DIR$/src/main/java/Logic/DatabaseManager.java</url>
+          <line>244</line>
           <properties />
-          <option name="timeStamp" value="21" />
+          <option name="timeStamp" value="23" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/Logic/DatabaseManager.java</url>
+          <line>256</line>
+          <properties />
+          <option name="timeStamp" value="32" />
         </line-breakpoint>
       </breakpoints>
-      <option name="time" value="22" />
+      <option name="time" value="33" />
     </breakpoint-manager>
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/main/java/UI/panels/MyPanel.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="102">
-          <caret line="6" column="3" lean-forward="false" selection-start-line="6" selection-start-column="3" selection-end-line="6" selection-end-column="3" />
-          <folding>
-            <element signature="e#0#111#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/UI/panels/WelcomePanel.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="119">
@@ -706,16 +716,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/UI/AppMain.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="252">
-          <caret line="113" column="0" lean-forward="false" selection-start-line="113" selection-start-column="0" selection-end-line="113" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="jar://$USER_HOME$/Downloads/mariadb-java-client-2.1.2.jar!/org/mariadb/jdbc/internal/com/read/resultset/rowprotocol/TextRowProtocol.class">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="442">
@@ -788,14 +788,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/Tools/DbUtil.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="573">
-          <caret line="79" column="46" lean-forward="false" selection-start-line="79" selection-start-column="46" selection-end-line="79" selection-end-column="46" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="jar:///usr/lib/jvm/default-runtime/lib/src.zip!/java.desktop/javax/swing/JComboBox.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="250">
@@ -839,39 +831,65 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/Logic/bean/Device.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-244">
-          <caret line="44" column="65" lean-forward="false" selection-start-line="44" selection-start-column="65" selection-end-line="44" selection-end-column="65" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/Logic/OperatorManager.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="612">
+        <state relative-caret-position="510">
           <caret line="51" column="25" lean-forward="false" selection-start-line="51" selection-start-column="25" selection-end-line="51" selection-end-column="25" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/Logic/DatabaseManager.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/UI/AppMain.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="241">
-          <caret line="197" column="39" lean-forward="true" selection-start-line="197" selection-start-column="39" selection-end-line="197" selection-end-column="39" />
+        <state relative-caret-position="358">
+          <caret line="35" column="22" lean-forward="true" selection-start-line="35" selection-start-column="22" selection-end-line="35" selection-end-column="22" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
+    <entry file="jar://$USER_HOME$/Downloads/mariadb-java-client-2.1.2.jar!/org/mariadb/jdbc/Driver.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="255">
+          <caret line="24" column="0" lean-forward="false" selection-start-line="24" selection-start-column="0" selection-end-line="24" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/UI/panels/OperatorPanel.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="282">
-          <caret line="542" column="0" lean-forward="true" selection-start-line="542" selection-start-column="0" selection-end-line="542" selection-end-column="0" />
+        <state relative-caret-position="360">
+          <caret line="548" column="57" lean-forward="true" selection-start-line="548" selection-start-column="57" selection-end-line="548" selection-end-column="57" />
           <folding>
-            <element signature="e#10895#11165#0" expanded="true" />
-            <element signature="e#11164#11165#0" expanded="true" />
+            <element signature="e#10924#11194#0" expanded="true" />
+            <element signature="e#11193#11194#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/Logic/bean/Device.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="470">
+          <caret line="56" column="38" lean-forward="false" selection-start-line="56" selection-start-column="38" selection-end-line="56" selection-end-column="38" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/Tools/DbUtil.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="266">
+          <caret line="79" column="0" lean-forward="false" selection-start-line="79" selection-start-column="0" selection-end-line="79" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/Logic/DatabaseManager.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="332">
+          <caret line="252" column="45" lean-forward="true" selection-start-line="252" selection-start-column="45" selection-end-line="252" selection-end-column="45" />
+          <folding>
+            <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>

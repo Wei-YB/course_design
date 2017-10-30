@@ -33,6 +33,7 @@ public class AppMain {
         initPanel();
 //        initLoginFrame();
         initMainFrame();
+        initManager();
     }
 
     public static AppMain getInstance() {

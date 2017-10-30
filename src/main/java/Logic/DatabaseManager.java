@@ -190,22 +190,73 @@ public class DatabaseManager {
         try {
             Connection conn = dbMySQL.getConnection();
 
+            float shaftPower = device.getShaftPower();
+            float motorPower = device.getMotorPower();
+            float motorEfficiency = device.getMotorEfficiency();
+            float factorK1 = device.getFactorK1();
+            float devicesPower = device.getDevicesPower();
+            String loadType = device.getLoadType();
+            String motorRevSpeed = device.getMotorRevSpeed();
+
+            String[] items = new String[7];
+
+            if (shaftPower == 1.000001f) {
+                items[0] = "NULL";
+            } else {
+                items[0] = String.valueOf(shaftPower);
+            }
+
+            if (motorPower == 1.000001f) {
+                items[1] = "NULL";
+            } else {
+                items[1] = String.valueOf(motorPower);
+            }
+
+            if (motorEfficiency == 100.000001f) {
+                items[2] = "NULL";
+            } else {
+                items[2] = String.valueOf(motorEfficiency);
+            }
+
+            if (factorK1 == 1.000001f) {
+                items[3] = "NULL";
+            } else {
+                items[3] = String.valueOf(factorK1);
+            }
+
+            if (devicesPower == 1.000001f) {
+                items[4] = "NULL";
+            } else {
+                items[4] = String.valueOf(devicesPower);
+            }
+
+            if (loadType == "") {
+                items[5] = "NULL";
+            } else {
+                items[5] = loadType;
+            }
+
+            if (motorRevSpeed == "") {
+                items[6] = "NULL";
+            } else {
+                items[6] = motorRevSpeed;
+            }
+
             int rs = dbMySQL.execUpdate(
-                    "INSERT INTO `参数`(" +
-                            "`用电设备名称`,`数量`,`机械轴功率/kW`,`电机功率/kW`," +
-                            "`电机效率/%`,`利用系数K1`,`设备总功率/kW`,`负荷类别`," +
-                            "` 电机转速/（r/m）`)" +
+                    "INSERT INTO `参数` " +
                             "VALUES(" +
-                            "'" + device.getDeviceName() + "'," +
-                            "'" + device.getNumber() + "'," +
-                            "'" + device.getShaftPower() + "'," +
-                            "'" + device.getShaftPower() + "'," +
-                            "'" + device.getShaftPower() + "'," +
-                            "'" + device.getShaftPower() + "'," +
-                            "'" + device.getShaftPower() + "'," +
-                            "'" + device.getShaftPower() + "'," +
-                            "'" + device.getShaftPower() + "'," +
-                            "'航海仪器','2',null,null,null,null,'1','II',null);");
+                            "NULL, " +
+                            "'" + device.getDeviceName() + "', " +
+                            device.getNumber() + ", " +
+                            items[0] + ", " +
+                            items[1] + ", " +
+                            items[2] + ", " +
+                            items[3] + ", " +
+                            items[4] + ", " +
+                            "'" + items[5] + "'," +
+                            "'" + device.getMotorRevSpeed() + "');");
+
+            System.out.println(rs);
         } catch (SQLException e) {
             e.printStackTrace();
         }
