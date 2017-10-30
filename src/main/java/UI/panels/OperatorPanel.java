@@ -37,9 +37,9 @@ public class OperatorPanel extends JPanel {
     private IconButton btnCalculate;
 
     private final String[] comboBoxLabels = {
-            " I      ",
-            " II     ",
-            " III    "};
+            "I",
+            "II",
+            "III"};
 
     private final DefaultComboBoxModel comboBoxModel = new DefaultComboBoxModel(comboBoxLabels);
 
@@ -194,8 +194,9 @@ public class OperatorPanel extends JPanel {
         inputUtilizationFactor.addFocusListener(new FocusAdapter() {
             @Override
             public void focusLost(FocusEvent e) {
-                ifInputValueInvalid(inputUtilizationFactor.getText());
-                inputUtilizationFactor.setText("");
+                if(ifInputValueInvalid(inputUtilizationFactor.getText())) {
+                    inputUtilizationFactor.setText("");
+                }
             }
         });
 
@@ -274,16 +275,18 @@ public class OperatorPanel extends JPanel {
         inputCoincidenceFactorK0.addFocusListener(new FocusAdapter() {
             @Override
             public void focusLost(FocusEvent e) {
-                ifInputValueInvalid(inputCoincidenceFactorK0.getText());
-                inputCoincidenceFactorK0.setText("");
+                if(ifInputValueInvalid(inputCoincidenceFactorK0.getText())) {
+                    inputCoincidenceFactorK0.setText("");
+                }
             }
         });
 
         inputMachineLoadFactorK2.addFocusListener(new FocusAdapter() {
             @Override
             public void focusLost(FocusEvent e) {
-                ifInputValueInvalid(inputMachineLoadFactorK2.getText());
-                inputMachineLoadFactorK2.setText("");
+                if(ifInputValueInvalid(inputMachineLoadFactorK2.getText())) {
+                    inputMachineLoadFactorK2.setText("");
+                }
             }
         });
 
@@ -374,7 +377,7 @@ public class OperatorPanel extends JPanel {
         return panel;
     }
 
-    private void ifInputValueInvalid(String text) {
+    private boolean ifInputValueInvalid(String text) {
         if (text.equals("0.") || text.equals("0.0")) {
             System.out.println("Invalid value");
             JOptionPane.showMessageDialog(
@@ -382,7 +385,9 @@ public class OperatorPanel extends JPanel {
                     "invalid value",
                     "Error Message",
                     JOptionPane.ERROR_MESSAGE);
+            return true;
         }
+        return false;
     }
 
     public void updateDataDisplay(int row) {
@@ -466,9 +471,9 @@ public class OperatorPanel extends JPanel {
 
             if (inputShaftPower.getText().equals("")) {
                 device.setShaftPower(1.000001f);
-                return;
+            } else {
+                device.setShaftPower(Float.parseFloat(inputShaftPower.getText()));
             }
-            device.setShaftPower(Float.parseFloat(inputShaftPower.getText()));
 
             if (inputUtilizationFactor.getText().equals("") && inputMotorPower.getText().equals("") &&
                     inputMotorEfficiency.getText().equals("")) {
@@ -511,9 +516,34 @@ public class OperatorPanel extends JPanel {
 
             if (inputMotorRevSpeed.getText().equals("")) {
                 device.setMotorRevSpeed("");
-                return;
+            } else {
+                device.setMotorRevSpeed(inputMotorRevSpeed.getText());
             }
-            device.setMotorRevSpeed(inputMotorRevSpeed.getText());
+
+            for (int i = 0; i < 5; i++) {
+
+                String k2 = ((JTextField)((JPanel)((JPanel)panelItems[3].
+                        getComponent(i)).getComponent(1)).getComponent(1)).
+                        getText();
+
+                String k0 = ((JTextField)((JPanel)((JPanel)panelItems[3].
+                        getComponent(i)).getComponent(2)).getComponent(1)).
+                        getText();
+
+                if (k2.equals("")) {
+                    device.setFactorK2(i, 0.0f);
+                } else {
+                    device.setFactorK2(i, Float.parseFloat(k2));
+                }
+                if (k0.equals("")) {
+                    device.setFactorK0(i, 0.0f);
+                } else {
+                    device.setFactorK0(i, Float.parseFloat(k0));
+                }
+
+                device.setLoadType(((JComboBox<String>)((JPanel)((JPanel)panelItems[3].
+                        getComponent(i)).getComponent(3)).getComponent(1)).getSelectedItem().toString());
+            }
 
             System.out.println(device);
 

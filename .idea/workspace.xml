@@ -5,12 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ff577bef-f3b5-415c-a498-cf2642286336" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/course-design/main/java/UI/panels/DatabasePanel.class" afterPath="$PROJECT_DIR$/out/production/course-design/main/java/UI/panels/DatabasePanel.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/course-design/main/java/UI/panels/OperatorPanel.class" afterPath="$PROJECT_DIR$/out/production/course-design/main/java/UI/panels/OperatorPanel.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/Logic/DatabaseManager.java" afterPath="$PROJECT_DIR$/src/main/java/Logic/DatabaseManager.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/Logic/Operator.java" afterPath="$PROJECT_DIR$/src/main/java/Logic/Operator.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/UI/panels/DatabasePanel.java" afterPath="$PROJECT_DIR$/src/main/java/UI/panels/DatabasePanel.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/UI/panels/OperatorPanel.java" afterPath="$PROJECT_DIR$/src/main/java/UI/panels/OperatorPanel.java" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
@@ -52,9 +48,12 @@
       <file leaf-file-name="OperatorPanel.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/UI/panels/OperatorPanel.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="251">
-              <caret line="272" column="0" lean-forward="true" selection-start-line="272" selection-start-column="0" selection-end-line="272" selection-end-column="0" />
-              <folding />
+            <state relative-caret-position="282">
+              <caret line="542" column="0" lean-forward="true" selection-start-line="542" selection-start-column="0" selection-end-line="542" selection-end-column="0" />
+              <folding>
+                <element signature="e#10895#11165#0" expanded="true" />
+                <element signature="e#11164#11165#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -462,12 +461,12 @@
       <workItem from="1509264570042" duration="2253000" />
       <workItem from="1509267116611" duration="28601000" />
       <workItem from="1509326774958" duration="341000" />
-      <workItem from="1509328616497" duration="7040000" />
+      <workItem from="1509328616497" duration="9166000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="147947000" />
+    <option name="totallyTimeSpent" value="150073000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="262" y="350" width="1920" height="1030" extended-state="6" />
@@ -513,13 +512,7 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/UI/panels/OperatorPanel.java</url>
-          <line>403</line>
-          <properties />
-          <option name="timeStamp" value="19" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/UI/panels/OperatorPanel.java</url>
-          <line>517</line>
+          <line>547</line>
           <properties />
           <option name="timeStamp" value="21" />
         </line-breakpoint>
@@ -874,9 +867,12 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/UI/panels/OperatorPanel.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="251">
-          <caret line="272" column="0" lean-forward="true" selection-start-line="272" selection-start-column="0" selection-end-line="272" selection-end-column="0" />
-          <folding />
+        <state relative-caret-position="282">
+          <caret line="542" column="0" lean-forward="true" selection-start-line="542" selection-start-column="0" selection-end-line="542" selection-end-column="0" />
+          <folding>
+            <element signature="e#10895#11165#0" expanded="true" />
+            <element signature="e#11164#11165#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
