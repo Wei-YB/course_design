@@ -4,6 +4,8 @@ import main.java.UI.UIConstants;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.Enumeration;
+import java.util.Vector;
 
 public class AboutPanel extends JPanel {
 
@@ -38,12 +40,23 @@ public class AboutPanel extends JPanel {
     private JPanel midPanel() {
         JPanel panel = new JPanel();
 
-        panel.setLayout(new FlowLayout(FlowLayout.LEFT, 5, 5));
+        panel.setLayout(new GridLayout(8, 1, 20, -3));
 
-        JLabel label = new JLabel("古ggugugu咕咕gg咕咕g， 这是一个互相甩锅的垃圾东西哈哈哈哈草拟ma");
-        label.setFont(new Font("font", Font.PLAIN, 15));
+        Vector<JLabel> labels = new Vector<>();
 
-        panel.add(label);
+        labels.add(new JLabel("开发人员：江炜洲, 李静德, 韦一波, 王圣凯, 王豪放, 韦吉振"));
+        labels.add(new JLabel("开发时间：2017-10-31"));
+        labels.add(new JLabel("版本：1.0.0 "));
+        labels.add(new JLabel("未经许可，禁止商用。"));
+
+        Enumeration labelsEnum = labels.elements();
+
+        while(labelsEnum.hasMoreElements()) {
+            JLabel element = (JLabel) labelsEnum.nextElement();
+            element.setFont(new Font("font", Font.PLAIN, 16));
+            panel.add(element);
+        }
+
         return panel;
     }
 
@@ -53,7 +66,7 @@ public class AboutPanel extends JPanel {
         panel.setBackground(UIConstants.SSUB_COLOR);
         panel.setLayout(new FlowLayout(FlowLayout.RIGHT, 10, 5));
 
-        JLabel label = new JLabel("@copyright 摸鱼小组-   王豪放  韦一波  王圣凯  韦吉振  李静德  江炜洲");
+        JLabel label = new JLabel("@copyright 摸鱼小组");
         label.setFont(new Font("font", Font.PLAIN, 18));
 
         panel.add(label);

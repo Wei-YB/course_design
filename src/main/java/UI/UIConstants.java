@@ -5,7 +5,7 @@ import java.awt.*;
 
 public class UIConstants {
 
-    public static final String APP_NAME = "舰船电力负荷分析系统";
+    public static final String APP_NAME = "舰船电力负荷分析系统 ";
 
     public static final String APP_VERSION = "V1.0.0";
 

@@ -271,7 +271,7 @@ public class DatabasePanel extends JPanel {
                         log.add(AppMain.username);
                         AppMain.logPanel.data.add(log);
 //                        System.out.println(row);
-                        AppMain.databaseManager.deleteDevice(row + 1);
+                        AppMain.databaseManager.deleteDevice(row);
                     }
                     return;
                 } else { return; }

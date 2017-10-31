@@ -8,7 +8,7 @@ public class Device {
 
     private Integer number;
 
-    private Float shaftPower;   //Nothing to do
+    private Float shaftPower;
 
     private Float motorPower;
     private Float motorEfficiency;
@@ -21,7 +21,7 @@ public class Device {
 
     private String loadType;
 
-    private String motorRevSpeed;   //Nothing to do
+    private String motorRevSpeed;
 
     public Device() {
         factorK2 = new Float[5];

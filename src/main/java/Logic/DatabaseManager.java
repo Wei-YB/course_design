@@ -438,13 +438,14 @@ public class DatabaseManager {
         try {
 
             Connection conn = dbMySQL.getConnection();
+            int id = AppMain.databaseManager.devices.get(row).getId().intValue();
 
-            dbMySQL.execUpdate("DELETE FROM `参数` WHERE `序号` = " + row);
+            dbMySQL.execUpdate("DELETE FROM `参数` WHERE `序号` = " + id);
             String[] statusStr = {"航行", "起锚", "停泊", "装卸货", "应急"};
 
             for (int i = 0; i < 5; i++) {
                 dbMySQL.execUpdate("DELETE FROM `" + statusStr[i] + "` " +
-                        " WHERE `序号` = " + row);
+                        " WHERE `序号` = " + id);
             }
 
             DatabaseManager.getInstance().devices.remove(row);
