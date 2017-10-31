@@ -1,6 +1,7 @@
 package main.java.UI.panels;
 
 import main.java.Logic.DatabaseManager;
+import main.java.Logic.OperatorManager;
 import main.java.Tools.DbUtil;
 import main.java.UI.AppMain;
 import main.java.UI.IconButton;
@@ -25,7 +26,9 @@ import java.io.IOException;
 import java.nio.file.FileSystem;
 import java.nio.file.FileSystems;
 import java.sql.*;
+import java.text.SimpleDateFormat;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.Vector;
@@ -256,8 +259,19 @@ public class DatabasePanel extends JPanel {
                             "是否删除该设备信息?",
                             "删除设备",
                             JOptionPane.YES_NO_OPTION) == 0) {
+
                         int row = ((JTable)e.getSource()).rowAtPoint(e.getPoint());
-                        AppMain.databaseManager.deleteDevice(row);
+
+                        Date date = new Date();
+                        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+
+                        Vector<Object> log = new Vector<>();
+                        log.add(sdf.format(date));
+                        log.add("删除设备 \"" + AppMain.databaseManager.devices.get(row).getDeviceName() + "\"");
+                        log.add(AppMain.username);
+                        AppMain.logPanel.data.add(log);
+//                        System.out.println(row);
+                        AppMain.databaseManager.deleteDevice(row + 1);
                     }
                     return;
                 } else { return; }

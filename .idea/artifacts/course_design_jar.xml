@@ -1,0 +1,16 @@
+<component name="ArtifactManager">
+  <artifact type="jar" build-on-make="true" name="course-design:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/course_design_jar</output-path>
+    <root id="archive" name="course-design.jar">
+      <element id="module-output" name="course-design" />
+      <element id="extracted-dir" path="$USER_HOME$/poi-3.17/poi-ooxml-3.17.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$USER_HOME$/mysql-connector-java-5.1.44-bin.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$USER_HOME$/poi-3.17/poi-ooxml-schemas-3.17.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$USER_HOME$/poi-3.17/ooxml-lib/xmlbeans-2.6.0.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$USER_HOME$/Downloads/mariadb-java-client-2.1.2.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$USER_HOME$/Downloads/substance-7.1.01.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$USER_HOME$/poi-3.17/poi-3.17.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$USER_HOME$/Downloads/trident-1.4.jar" path-in-jar="/" />
+    </root>
+  </artifact>
+</component>

@@ -15,6 +15,9 @@ import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Vector;
 
 public class OperatorPanel extends JPanel {
 
@@ -572,6 +575,15 @@ public class OperatorPanel extends JPanel {
                     "系统信息",
                     JOptionPane.YES_OPTION);
 
+            Date date = new Date();
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+
+            Vector<Object> log = new Vector<>();
+            log.add(sdf.format(date));
+            log.add("增加设备 \"" + device.getDeviceName() + "\"");
+            log.add(AppMain.username);
+            AppMain.logPanel.data.add(log);
+
             AppMain.databaseManager.insertDevice(device);
 //            System.out.println(device);
 
@@ -588,15 +600,42 @@ public class OperatorPanel extends JPanel {
                     "系统信息",
                     JOptionPane.YES_OPTION);
 
+            Date date = new Date();
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+
+            Vector<Object> log = new Vector<>();
+            log.add(sdf.format(date));
+            log.add("修改设备 \"" + AppMain.databaseManager.devices.get(curSelectedRow).getDeviceName() + "\"");
+            log.add(AppMain.username);
+            AppMain.logPanel.data.add(log);
+
             AppMain.databaseManager.updateDevice(device, curSelectedRow + 1);
         });
 
         btnCalculate.addActionListener((e) -> {
             Operator operator = new Operator();
 
+            String[] results = new String[5];
+
+            Date date = new Date();
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+
+
             for (int i = 0; i < 5; i++) {
-                outputTextField[i].setText(String.valueOf(operator.calculate(i)));
+                results[i] = String.valueOf(operator.calculate(i));
+                outputTextField[i].setText(results[i]);
             }
+
+            Vector<Object> log = new Vector<>();
+            log.add(sdf.format(date));
+            log.add("计算结果 " +
+                    "航行: " + results[0] +
+                    " 起锚: " + results[1] +
+                    " 停泊: " + results[2] +
+                    " 装卸货: " + results[3] +
+                    " 应急: " + results[4]);
+            log.add(AppMain.username);
+            AppMain.logPanel.data.add(log);
         });
     }
 }

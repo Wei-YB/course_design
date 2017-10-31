@@ -31,6 +31,8 @@ public class AppMain {
     public static DatabaseManager databaseManager;
     public static OperatorManager operatorManager;
 
+    public static String username;
+
     private AppMain() {
         initPanel();
 

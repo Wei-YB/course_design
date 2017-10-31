@@ -9,6 +9,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.Connection;
 import java.sql.ResultSet;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Vector;
 
 public class LoginFrame extends JFrame {
 
@@ -174,6 +177,18 @@ public class LoginFrame extends JFrame {
 //                        AppMain.userPrivilege = rs.getInt("privilege");
 
                         AppMain app = AppMain.getInstance();
+
+                        Date date = new Date();
+                        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+
+                        Vector<Object> log = new Vector<>();
+                        log.add(sdf.format(date));
+                        log.add("登陆");
+                        log.add(inputUid.getText());
+
+                        AppMain.logPanel.data.add(log);
+                        AppMain.username = inputUid.getText();
+
                         app.switchFrame();
                         break;
                     default:
