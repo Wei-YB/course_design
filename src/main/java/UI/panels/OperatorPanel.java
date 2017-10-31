@@ -44,6 +44,8 @@ public class OperatorPanel extends JPanel {
 
     private final DefaultComboBoxModel comboBoxModel = new DefaultComboBoxModel(comboBoxLabels);
 
+    private int curSelectedRow;
+
     public OperatorPanel() {
         init();
         addComponent();
@@ -53,6 +55,8 @@ public class OperatorPanel extends JPanel {
     private void init() {
         this.setBackground(UIConstants.MAIN_COLOR);
         this.setLayout(new BorderLayout());
+
+        curSelectedRow = 0;
     }
 
     private void addComponent() {
@@ -90,10 +94,10 @@ public class OperatorPanel extends JPanel {
         panelNorth.setLayout(new GridLayout(1, 2, 20, 15));
 
         btnAddDevice = new IconButton(UIConstants.ICON_OPERATOR_ADD,
-                "Add Device",
+                "增加设备",
                 "Add Device into the database");
         btnEditDevice = new IconButton(UIConstants.ICON_OPERATOR_EDIT,
-                "Edit Device",
+                "修改设备",
                 "Edit Device from the database");
 
         panelNorth.add(btnAddDevice);
@@ -109,19 +113,19 @@ public class OperatorPanel extends JPanel {
 //        panelItems[3] = new JPanel();
 //        panelItems[3].setBackground(UIConstants.MAIN_COLOR);
 
-        panelItems[0].setLayout(new FlowLayout(FlowLayout.CENTER, 22, 13));
+        panelItems[0].setLayout(new FlowLayout(FlowLayout.CENTER, 21, 13));
         panelItems[1].setLayout(new FlowLayout(FlowLayout.LEFT, 15, 12));
         panelItems[2].setLayout(new FlowLayout(FlowLayout.LEFT, 15, 12));
         panelItems[3].setLayout(new GridLayout(2, 3, 12, 12));
 
-        JLabel labelDeviceName = new JLabel("      Device Name:    ");
-        JLabel labelDeviceNumber = new JLabel("     Device Number:   ");
+        JLabel labelDeviceName = new JLabel("设备名称：");
+        JLabel labelDeviceNumber = new JLabel("设备数量：");
 
         inputDeviceName = new JTextField();
         inputDeviceNumber = new JTextField();
 
-        inputDeviceName.setPreferredSize(new Dimension(125, 30));
-        inputDeviceNumber.setPreferredSize(new Dimension(125, 30));
+        inputDeviceName.setPreferredSize(new Dimension(368, 30));
+        inputDeviceNumber.setPreferredSize(new Dimension(80, 30));
 
         inputDeviceNumber.setDocument(new RegExpForTextField("^(([1-9])|([1-9][0-9]))$"));
         inputDeviceNumber.setHorizontalAlignment(JTextField.CENTER);
@@ -131,12 +135,12 @@ public class OperatorPanel extends JPanel {
         panelItems[0].add(labelDeviceNumber);
         panelItems[0].add(inputDeviceNumber);
 
-        JLabel labelShaftPower = new JLabel("Shaft Power:");
-        JLabel labelMotorPower = new JLabel("Motor Power:");
-        JLabel labelDevicesPower = new JLabel("Devices Power:");
-        JLabel labelMotorEfficiency = new JLabel("Motor Efficiency:");
-        JLabel labelUtilizationFactor = new JLabel("Utilization Factor K1:");
-        JLabel labelMotorRevSpeed = new JLabel("Motor Rev Speed:");
+        JLabel labelShaftPower = new JLabel("机械轴功率：");
+        JLabel labelMotorPower = new JLabel("电机功率：");
+        JLabel labelDevicesPower = new JLabel("设备总功率：");
+        JLabel labelMotorEfficiency = new JLabel("               电机效率：    ");
+        JLabel labelUtilizationFactor = new JLabel("利用系数 K1:  ");
+        JLabel labelMotorRevSpeed = new JLabel("   电机转速:   ");
 
         JLabel labelSPUnit = new JLabel("kW");
         JLabel labelMPUnit = new JLabel("kW");
@@ -160,9 +164,9 @@ public class OperatorPanel extends JPanel {
         inputShaftPower.setPreferredSize(new Dimension(90, 30));
         inputMotorPower.setPreferredSize(new Dimension(90, 30));
         inputDevicesPower.setPreferredSize(new Dimension(90, 30));
-        inputMotorEfficiency.setPreferredSize(new Dimension(60, 30));
-        inputUtilizationFactor.setPreferredSize(new Dimension(70, 30));
-        inputMotorRevSpeed.setPreferredSize(new Dimension(60, 30));
+        inputMotorEfficiency.setPreferredSize(new Dimension(90, 30));
+        inputUtilizationFactor.setPreferredSize(new Dimension(90, 30));
+        inputMotorRevSpeed.setPreferredSize(new Dimension(90, 30));
 
         inputShaftPower.setDocument(new RegExpForTextField(
                 "^(([0-9])|([0-9]\\.)|([0-9]\\.[0-9])|([0-9]\\.[0-9][1-9])|" +
@@ -209,9 +213,8 @@ public class OperatorPanel extends JPanel {
         panelItems[1].add(inputMotorPower);
         panelItems[1].add(labelMPUnit);
 
-        panelItems[1].add(labelDevicesPower);
-        panelItems[1].add(inputDevicesPower);
-        panelItems[1].add(labelDPUnit);
+        panelItems[1].add(labelUtilizationFactor);
+        panelItems[1].add(inputUtilizationFactor);
 
         panelItems[2].add(labelMotorEfficiency);
         panelItems[2].add(inputMotorEfficiency);
@@ -221,14 +224,15 @@ public class OperatorPanel extends JPanel {
         panelItems[2].add(inputMotorRevSpeed);
         panelItems[2].add(labelGRSUnit);
 
-        panelItems[2].add(labelUtilizationFactor);
-        panelItems[2].add(inputUtilizationFactor);
+        panelItems[2].add(labelDevicesPower);
+        panelItems[2].add(inputDevicesPower);
+        panelItems[2].add(labelDPUnit);
 
-        panelItems[3].add(statusPanel("Navigating"));
-        panelItems[3].add(statusPanel("Weighing"));
-        panelItems[3].add(statusPanel("Berthing"));
-        panelItems[3].add(statusPanel("Stevedoring"));
-        panelItems[3].add(statusPanel("Emergency"));
+        panelItems[3].add(statusPanel("航行状态"));
+        panelItems[3].add(statusPanel("起锚状态"));
+        panelItems[3].add(statusPanel("停泊状态"));
+        panelItems[3].add(statusPanel("装卸货状态"));
+        panelItems[3].add(statusPanel("应急状态"));
 
         panelItems[3].add(resultPanel());
 
@@ -253,20 +257,23 @@ public class OperatorPanel extends JPanel {
         for (int i = 0; i < 4; i++) {
             panelItems[i] = new JPanel();
             panelItems[i].setBackground(Color.LIGHT_GRAY);
-            panelItems[i].setLayout(new FlowLayout(FlowLayout.LEFT, 15, 8));
+            panelItems[i].setLayout(new FlowLayout(FlowLayout.LEFT, 20, 8));
         }
 
         JLabel labelNavigating = new JLabel(statusName);
-        labelNavigating.setFont(new Font("font", Font.BOLD, 20));
-        JLabel labelCoincidenceFactorK0 = new JLabel("Coincidence Factor K0:       ");
-        JLabel labelMachineLoadFactorK2 = new JLabel("Machine Load Factor K2:    ");
-        JLabel labelLoadType = new JLabel("Load Type:                           ");
+        labelNavigating.setFont(new Font("font", Font.PLAIN, 24));
+        JLabel labelCoincidenceFactorK0 = new JLabel("同时使用系数K0:  ");
+        JLabel labelMachineLoadFactorK2 = new JLabel("机械负荷系数K2:  ");
+        JLabel labelLoadType = new JLabel("负荷类别：                     ");
 
         JTextField inputCoincidenceFactorK0 = new JTextField();
         JTextField inputMachineLoadFactorK2 = new JTextField();
 
-        inputCoincidenceFactorK0.setPreferredSize(new Dimension(60, 30));
-        inputMachineLoadFactorK2.setPreferredSize(new Dimension(60, 30));
+        labelCoincidenceFactorK0.setFont(new Font("font", Font.PLAIN, 16));
+        labelMachineLoadFactorK2.setFont(new Font("font", Font.PLAIN, 16));
+
+        inputCoincidenceFactorK0.setPreferredSize(new Dimension(80, 30));
+        inputMachineLoadFactorK2.setPreferredSize(new Dimension(80, 30));
 
         inputCoincidenceFactorK0.setDocument(new RegExpForTextField(
                 "^((1)|(1\\.)|(1\\.0)|(0)|(0\\.)|(0\\.[0-9])|(0\\.[0-9][1-9])|(0\\.[1-9][0-9]))$"));
@@ -295,6 +302,7 @@ public class OperatorPanel extends JPanel {
         inputMachineLoadFactorK2.setHorizontalAlignment(JTextField.CENTER);
 
         JComboBox<String> comboBoxLoadType = new JComboBox<>(comboBoxModel);
+        comboBoxLoadType.setPreferredSize(new Dimension(80, 30));
 
         panelItems[0].add(labelNavigating);
         panelItems[1].add(labelCoincidenceFactorK0);
@@ -318,7 +326,7 @@ public class OperatorPanel extends JPanel {
         for (int i = 0; i < 6; i++) {
             panelItems[i] = new JPanel();
 
-            panelItems[i].setBackground(Color.LIGHT_GRAY);
+            panelItems[i].setBackground(new Color(99, 99, 99));
             panelItems[i].setLayout(new FlowLayout(FlowLayout.LEFT, 20, 5));
         }
 
@@ -326,14 +334,14 @@ public class OperatorPanel extends JPanel {
         panel.setLayout(new GridLayout(6, 1));
 
 
-        JLabel labelTitle = new JLabel("Result");
+        JLabel labelTitle = new JLabel("计算结果");
 
         JLabel[] labelEachStatusPower = new JLabel[5];
-        labelEachStatusPower[0] = new JLabel("航行所需总功率:    ");
-        labelEachStatusPower[1] = new JLabel("起锚所需总功率:    ");
-        labelEachStatusPower[2] = new JLabel("停泊所需总功率:    ");
+        labelEachStatusPower[0] = new JLabel("航行所需总功率:     ");
+        labelEachStatusPower[1] = new JLabel("起锚所需总功率:     ");
+        labelEachStatusPower[2] = new JLabel("停泊所需总功率:     ");
         labelEachStatusPower[3] = new JLabel("装卸货所需总功率: ");
-        labelEachStatusPower[4] = new JLabel("应急所需总功率:    ");
+        labelEachStatusPower[4] = new JLabel("应急所需总功率:     ");
 
         JLabel[] labelUnit = new JLabel[5];
 
@@ -342,7 +350,7 @@ public class OperatorPanel extends JPanel {
             labelUnit[i].setFont(new Font("font", Font.ITALIC, 15));
         }
 
-        labelTitle.setFont(new Font("font", Font.BOLD, 20));
+        labelTitle.setFont(new Font("font", Font.PLAIN, 22));
 
         outputTextField = new JTextField[5];
 
@@ -379,7 +387,7 @@ public class OperatorPanel extends JPanel {
     }
 
     private boolean ifInputValueInvalid(String text) {
-        if (text.equals("0.") || text.equals("0.0")) {
+        if (text.equals("0.") || text.equals("0.0") || text.equals("1.")) {
             System.out.println("Invalid value");
             JOptionPane.showMessageDialog(
                     null,
@@ -393,6 +401,9 @@ public class OperatorPanel extends JPanel {
 
     public void updateDataDisplay(int row) {
 
+        curSelectedRow = row;
+
+//        System.out.println(DatabaseManager.getInstance().devices);
         Device device = DatabaseManager.getInstance().devices.get(row);
 
         inputDeviceName.setText((String)OperatorManager.getter(device, "DeviceName"));
@@ -459,92 +470,107 @@ public class OperatorPanel extends JPanel {
         return false;
     }
 
-    private void addListener() {
+    private Device editDevice(Device device) {
 
-        btnAddDevice.addActionListener((e) -> {
-            Device device = new Device();
+        if (device == null) { device = new Device(); }
 
-            if (setDataErrorHandler(inputDeviceName, "请输入设备名称")) { return; }
-            device.setDeviceName(inputDeviceName.getText());
+        if (setDataErrorHandler(inputDeviceName, "请输入设备名称")) { return null; }
+        device.setDeviceName(inputDeviceName.getText());
 
-            if (setDataErrorHandler(inputDeviceNumber, "请输入设备数量")) { return; }
-            device.setNumber(Integer.parseInt(inputDeviceNumber.getText()));
+        if (setDataErrorHandler(inputDeviceNumber, "请输入设备数量")) { return null; }
+        device.setNumber(Integer.parseInt(inputDeviceNumber.getText()));
 
-            if (inputShaftPower.getText().equals("")) {
-                device.setShaftPower(1.000001f);
-            } else {
-                device.setShaftPower(Float.parseFloat(inputShaftPower.getText()));
-            }
+        if (inputShaftPower.getText().equals("")) {
+            device.setShaftPower(1.000001f);
+        } else {
+            device.setShaftPower(Float.parseFloat(inputShaftPower.getText()));
+        }
 
-            if (inputUtilizationFactor.getText().equals("") && inputMotorPower.getText().equals("") &&
-                    inputMotorEfficiency.getText().equals("")) {
-                if (!inputDevicesPower.getText().equals("")) {
-                    device.setFactorK1(1.000001f);
-                    device.setMotorPower(1.000001f);
-                    device.setMotorEfficiency(100.000001f);
-                    device.setDevicesPower(Float.parseFloat(inputDevicesPower.getText()));
-                } else {
-                    JOptionPane.showMessageDialog(
-                            null,
-                            "请输入＂设备总功率＂一项＂或电机功率＂,＂电机效率＂,＂利用系数＂三项",
-                            "Error Message",
-                            JOptionPane.ERROR_MESSAGE);
-                    return;
-                }
-            } else if (inputDevicesPower.getText().equals("")) {
-                if (!inputUtilizationFactor.getText().equals("") && !inputMotorPower.getText().equals("") &&
-                        !inputMotorEfficiency.getText().equals("")) {
-                    device.setFactorK1(Float.parseFloat(inputUtilizationFactor.getText()));
-                    device.setMotorPower(Float.parseFloat(inputMotorPower.getText()));
-                    device.setMotorEfficiency(Float.parseFloat(inputMotorEfficiency.getText()));
-                    device.setDevicesPower(1.000001f);
-                } else {
-                    JOptionPane.showMessageDialog(
-                            null,
-                            "请输入＂设备总功率＂一项＂或电机功率＂,＂电机效率＂,＂利用系数＂三项",
-                            "Error Message",
-                            JOptionPane.ERROR_MESSAGE);
-                    return;
-                }
+        if (inputUtilizationFactor.getText().equals("") && inputMotorPower.getText().equals("") &&
+                inputMotorEfficiency.getText().equals("")) {
+            if (!inputDevicesPower.getText().equals("")) {
+                device.setFactorK1(1.000001f);
+                device.setMotorPower(1.000001f);
+                device.setMotorEfficiency(100.000001f);
+                device.setDevicesPower(Float.parseFloat(inputDevicesPower.getText()));
             } else {
                 JOptionPane.showMessageDialog(
                         null,
                         "请输入＂设备总功率＂一项＂或电机功率＂,＂电机效率＂,＂利用系数＂三项",
                         "Error Message",
                         JOptionPane.ERROR_MESSAGE);
-                return;
+                return null;
             }
-
-            if (inputMotorRevSpeed.getText().equals("")) {
-                device.setMotorRevSpeed("");
+        } else if (inputDevicesPower.getText().equals("")) {
+            if (!inputUtilizationFactor.getText().equals("") && !inputMotorPower.getText().equals("") &&
+                    !inputMotorEfficiency.getText().equals("")) {
+                device.setFactorK1(Float.parseFloat(inputUtilizationFactor.getText()));
+                device.setMotorPower(Float.parseFloat(inputMotorPower.getText()));
+                device.setMotorEfficiency(Float.parseFloat(inputMotorEfficiency.getText()));
+                device.setDevicesPower(1.000001f);
             } else {
-                device.setMotorRevSpeed(inputMotorRevSpeed.getText());
+                JOptionPane.showMessageDialog(
+                        null,
+                        "请输入＂设备总功率＂一项＂或电机功率＂,＂电机效率＂,＂利用系数＂三项",
+                        "Error Message",
+                        JOptionPane.ERROR_MESSAGE);
+                return null;
+            }
+        } else {
+            JOptionPane.showMessageDialog(
+                    null,
+                    "请输入＂设备总功率＂一项＂或电机功率＂,＂电机效率＂,＂利用系数＂三项",
+                    "Error Message",
+                    JOptionPane.ERROR_MESSAGE);
+            return null;
+        }
+
+        if (inputMotorRevSpeed.getText().equals("")) {
+            device.setMotorRevSpeed("");
+        } else {
+            device.setMotorRevSpeed(inputMotorRevSpeed.getText());
+        }
+
+        for (int i = 0; i < 5; i++) {
+
+            String k2 = ((JTextField)((JPanel)((JPanel)panelItems[3].
+                    getComponent(i)).getComponent(2)).getComponent(1)).
+                    getText();
+
+            String k0 = ((JTextField)((JPanel)((JPanel)panelItems[3].
+                    getComponent(i)).getComponent(1)).getComponent(1)).
+                    getText();
+
+            if (k2.equals("")) {
+                device.setFactorK2(i, 0.000001f);
+            } else {
+                device.setFactorK2(i, Float.parseFloat(k2));
+            }
+            if (k0.equals("")) {
+                device.setFactorK0(i, 0.000001f);
+            } else {
+                device.setFactorK0(i, Float.parseFloat(k0));
             }
 
-            for (int i = 0; i < 5; i++) {
+            device.setLoadType(((JComboBox<String>)((JPanel)((JPanel)panelItems[3].
+                    getComponent(i)).getComponent(3)).getComponent(1)).getSelectedItem().toString());
+        }
 
-                String k2 = ((JTextField)((JPanel)((JPanel)panelItems[3].
-                        getComponent(i)).getComponent(2)).getComponent(1)).
-                        getText();
+        return device;
+    }
 
-                String k0 = ((JTextField)((JPanel)((JPanel)panelItems[3].
-                        getComponent(i)).getComponent(1)).getComponent(1)).
-                        getText();
+    private void addListener() {
 
-                if (k2.equals("")) {
-                    device.setFactorK2(i, 0.0f);
-                } else {
-                    device.setFactorK2(i, Float.parseFloat(k2));
-                }
-                if (k0.equals("")) {
-                    device.setFactorK0(i, 0.0f);
-                } else {
-                    device.setFactorK0(i, Float.parseFloat(k0));
-                }
+        btnAddDevice.addActionListener((e) -> {
 
-                device.setLoadType(((JComboBox<String>)((JPanel)((JPanel)panelItems[3].
-                        getComponent(i)).getComponent(3)).getComponent(1)).getSelectedItem().toString());
-            }
+            Device device = editDevice(null);
+
+            if (device == null) { return; }
+            JOptionPane.showMessageDialog(
+                    null,
+                    "设备添加成功",
+                    "系统信息",
+                    JOptionPane.YES_OPTION);
 
             AppMain.databaseManager.insertDevice(device);
 //            System.out.println(device);
@@ -553,6 +579,16 @@ public class OperatorPanel extends JPanel {
 
         btnEditDevice.addActionListener((e) -> {
 
+            Device device = editDevice(DatabaseManager.getInstance().devices.get(curSelectedRow));
+
+            if (device == null) { return; }
+            JOptionPane.showMessageDialog(
+                    null,
+                    "设备修改成功",
+                    "系统信息",
+                    JOptionPane.YES_OPTION);
+
+            AppMain.databaseManager.updateDevice(device, curSelectedRow + 1);
         });
 
         btnCalculate.addActionListener((e) -> {

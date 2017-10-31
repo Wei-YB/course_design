@@ -41,7 +41,7 @@ public class DbUtil {
     public synchronized Connection getConnection() {
         try {
             conn = DriverManager.getConnection(DBUrl + DBName, DBUser, DBPassword);
-            conn.setAutoCommit(false);
+            conn.setAutoCommit(true);
         } catch (SQLException e) {
             e.printStackTrace();
         }

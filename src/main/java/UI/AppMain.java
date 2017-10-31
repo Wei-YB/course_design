@@ -5,6 +5,8 @@ import main.java.Logic.DatabaseManager;
 import main.java.Logic.Operator;
 import main.java.Logic.OperatorManager;
 import main.java.UI.panels.*;
+import org.pushingpixels.substance.api.SubstanceLookAndFeel;
+import org.pushingpixels.substance.api.skin.*;
 
 import javax.swing.*;
 import java.awt.*;
@@ -31,8 +33,10 @@ public class AppMain {
 
     private AppMain() {
         initPanel();
-//        initLoginFrame();
-        initMainFrame();
+
+        initLoginFrame();
+//        initMainFrame();
+
         initManager();
     }
 
@@ -110,11 +114,13 @@ public class AppMain {
             @Override
             public void run() {
                 try {
+                    UIManager.setLookAndFeel(new SubstanceOfficeBlue2007LookAndFeel());
                     AppMain app = AppMain.getInstance();
                     app.frame.setVisible(true);
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
+
             }
         });
     }

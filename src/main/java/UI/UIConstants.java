@@ -5,7 +5,7 @@ import java.awt.*;
 
 public class UIConstants {
 
-    public static final String APP_NAME = "xx";
+    public static final String APP_NAME = "舰船电力负荷分析系统";
 
     public static final String APP_VERSION = "V1.0.0";
 
@@ -14,9 +14,9 @@ public class UIConstants {
      */
     public static final Color MAIN_COLOR = Color.WHITE;
 
-    public static final Color SUB_COLOR = Color.lightGray;
+    public static final Color SUB_COLOR = new Color(126, 126, 126);
 
-    public static final Color SSUB_COLOR = new Color(229, 229, 229);
+    public static final Color SSUB_COLOR = new Color(166, 166, 166);
 
     public static final Color TOOL_BAR_COLOR = new Color(11, 209, 189);
 
@@ -62,7 +62,7 @@ public class UIConstants {
     /**
      * Size
      */
-    public static final int TOOL_BAR_WIDTH = 130;
+    public static final int TOOL_BAR_WIDTH = 140;
 
     public static final Dimension LABEL_SIZE = new Dimension(78, 30);
 
@@ -71,8 +71,8 @@ public class UIConstants {
     public static final int SCREEN_HEIGHT = (int) java.awt.Toolkit.getDefaultToolkit().getScreenSize().height;
 
     public static final Rectangle APP_BOUNDS = new Rectangle(
-            (SCREEN_WIDTH - 1100) / 2, (SCREEN_HEIGHT - 800) / 2,
-            1100, 800);
+            (SCREEN_WIDTH - 1150) / 2, (SCREEN_HEIGHT - 820) / 2,
+            1150, 820);
 
     /**
      * Text

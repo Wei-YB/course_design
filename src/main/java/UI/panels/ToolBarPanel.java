@@ -68,12 +68,12 @@ public class ToolBarPanel extends JPanel {
 
         btnDb = new IconButton(
                 UIConstants.ICON_DATABASE,
-                "Database",
+                "设备列表",
                 "show database");
 
         btnOperator = new IconButton(
                 UIConstants.ICON_OPERATOR,
-                "Operator ",
+                "设备操作 ",
                 "add/edit any devices");
 
 //        btnResult = new IconButton(
@@ -83,12 +83,12 @@ public class ToolBarPanel extends JPanel {
 
         btnLogger = new IconButton(
                 UIConstants.ICON_LOGGER,
-                "Log          ",
+                "日志系统",
                 "the log of all operation(s)");
 
         btnAbout = new IconButton(
                 UIConstants.ICON_ABOUT,
-                "About       ",
+                "关于           ",
                 "About this software");
 
         panelBtnDb.add(btnDb);

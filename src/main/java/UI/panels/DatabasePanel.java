@@ -14,6 +14,7 @@ import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.JTableHeader;
 import javax.swing.table.TableColumn;
 import javax.swing.table.TableColumnModel;
+import javax.xml.crypto.Data;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -63,6 +64,7 @@ public class DatabasePanel extends JPanel {
 
     private void initDb() {
         DatabaseManager dbManager = DatabaseManager.getInstance();
+        dbManager.initDbData();
 
         dbMySQL = dbManager.getDbMySQL();
         dbHeads = dbManager.getDbHeads();
@@ -94,10 +96,11 @@ public class DatabasePanel extends JPanel {
 
         JPanel dbTitlePanel = new JPanel();
         dbTitlePanel.setBackground(UIConstants.MAIN_COLOR);
-        dbTitlePanel.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
+        dbTitlePanel.setLayout(new FlowLayout(FlowLayout.CENTER, 0, 5));
 
-        JLabel title = new JLabel("xxxxxxxxxxxxxx");
-        title.setFont(new Font("font", Font.BOLD, 14));
+        JLabel title = new JLabel("某沿海货轮用电设备参数");
+        title.setFont(new Font("font", Font.BOLD, 19));
+        title.setForeground(Color.BLACK);
 
         dbTitlePanel.add(title);
 
@@ -113,7 +116,7 @@ public class DatabasePanel extends JPanel {
         panel.setLayout(new FlowLayout(FlowLayout.RIGHT, 25, 5));
 
         btnPrint = new IconButton(UIConstants.ICON_PRINT,
-                "Print",
+                "打印",
                 "print(output) the table into a sheet file");
 
         panel.add(btnPrint);
@@ -157,7 +160,7 @@ public class DatabasePanel extends JPanel {
         dbTableHeader.addColumnGroup(columnGroupStatus);
 
         dbTableHeader.setReorderingAllowed(false);
-        dbTableHeader.setBackground(new Color(37, 157, 221));
+        dbTableHeader.setBackground(new Color(57, 200, 231));
         dbTableHeader.setFont(new Font("font", Font.PLAIN, 11));
         dbTableHeader.setPreferredSize(new Dimension(dbTableHeader.getWidth(), 70));
 
@@ -211,10 +214,19 @@ public class DatabasePanel extends JPanel {
             }
 
             header.setResizingColumn(column);
-            column.setWidth((int) ((width + myTable.getIntercellSpacing().width) * 1.0f));
+            column.setWidth((int) ((width + myTable.getIntercellSpacing().width) * 1.15f));
         }
     }
 
+    public void refreshTable() {
+        ((JPanel)this.getComponent(0)).remove(1);
+        initDb();
+        ((JPanel)this.getComponent(0)).add(dbPanel());
+
+        this.addListener();
+
+        this.updateUI();
+    }
 
     private void addListener() {
         btnPrint.addActionListener((e) -> {
@@ -238,8 +250,19 @@ public class DatabasePanel extends JPanel {
 
                     AppMain app = AppMain.getInstance();
                     app.switchPanel(AppMain.operatorPanel);
+                } else if (e.isMetaDown()) {
+
+                    if(JOptionPane.showConfirmDialog(null,
+                            "是否删除该设备信息?",
+                            "删除设备",
+                            JOptionPane.YES_NO_OPTION) == 0) {
+                        int row = ((JTable)e.getSource()).rowAtPoint(e.getPoint());
+                        AppMain.databaseManager.deleteDevice(row);
+                    }
+                    return;
                 } else { return; }
             }
         });
+
     }
 }

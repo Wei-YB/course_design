@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="trident-1.4">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/Downloads/trident-1.4.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

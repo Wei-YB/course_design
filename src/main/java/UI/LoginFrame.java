@@ -25,7 +25,7 @@ public class LoginFrame extends JFrame {
     private void init() {
 
         this.setBackground(UIConstants.SUB_COLOR);
-        this.setTitle("Login System");
+        this.setTitle(UIConstants.APP_NAME + " " + UIConstants.APP_VERSION);
         this.setLayout(new BorderLayout());
         this.setBounds(UIConstants.SCREEN_WIDTH / 2 - 150, UIConstants.SCREEN_HEIGHT / 2 - 125, 300, 250);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -42,7 +42,8 @@ public class LoginFrame extends JFrame {
         panel.setBackground(UIConstants.SUB_COLOR);
         panel.setLayout(new FlowLayout(FlowLayout.CENTER));
 
-        JLabel title = new JLabel("XXXXXX System");
+        JLabel title = new JLabel("登陆验证系统");
+        title.setFont(new Font("font", Font.PLAIN, 15));
         panel.add(title);
 
         return panel;
@@ -55,9 +56,10 @@ public class LoginFrame extends JFrame {
 
         JPanel panelInput = new JPanel();
         panelInput.setLayout(new FlowLayout(FlowLayout.CENTER, 10, 20));
+        panelInput.setBackground(new Color(100, 100, 100));
 
         JPanel panelLogin = new JPanel();
-        panelLogin.setBackground(UIConstants.SUB_COLOR);
+        panelLogin.setBackground(UIConstants.SSUB_COLOR);
         panelLogin.setLayout(new FlowLayout(FlowLayout.CENTER));
 
         btnLogin = new IconButton(UIConstants.ICON_LOGIN_LOGIN,
@@ -116,7 +118,7 @@ public class LoginFrame extends JFrame {
                 while (rs.next()) {
                     if (inputUid.getText().equals("")) {
                         loginFlag = -1;
-                    } else if (inputUid.getText().length() < 6) {
+                    } else if (inputUid.getText().length() < 4) {
                         loginFlag = -11;
                     }
                     else if (String.valueOf(inputPwd.getPassword()).equals("")) {
@@ -138,15 +140,15 @@ public class LoginFrame extends JFrame {
                         System.out.println("Username blank empty");
                         JOptionPane.showMessageDialog(
                                 null,
-                                "Username blank empty",
+                                "请输入用户名",
                                 "Error Message",
                                 JOptionPane.ERROR_MESSAGE);
                         break;
                     case -11:
-                        System.out.println("Username length less than 6");
+                        System.out.println("Username length less than 4");
                         JOptionPane.showMessageDialog(
                                 null,
-                                "Username length less than 6",
+                                "用户名长度不能少于4位",
                                 "Error Message",
                                 JOptionPane.ERROR_MESSAGE);
                         break;
@@ -154,7 +156,7 @@ public class LoginFrame extends JFrame {
                         System.out.println("Password blank empty");
                         JOptionPane.showMessageDialog(
                                 null,
-                                "Password blank empty",
+                                "请输入密码",
                                 "Error Message",
                                 JOptionPane.ERROR_MESSAGE);
                         break;
@@ -162,7 +164,7 @@ public class LoginFrame extends JFrame {
                         System.out.println("Password incorrect");
                         JOptionPane.showMessageDialog(
                                 null,
-                                "Password incorrect",
+                                "密码验证失败",
                                 "Error Message",
                                 JOptionPane.ERROR_MESSAGE);
                         break;
@@ -178,7 +180,7 @@ public class LoginFrame extends JFrame {
                         System.out.println("Error");
                         JOptionPane.showMessageDialog(
                                 null,
-                                "Username or password wrong",
+                                "用户名或密码错误",
                                 "Error Message",
                                 JOptionPane.ERROR_MESSAGE);
                         break;

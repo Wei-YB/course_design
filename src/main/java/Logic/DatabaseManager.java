@@ -2,6 +2,8 @@ package main.java.Logic;
 
 import main.java.Logic.bean.Device;
 import main.java.Tools.DbUtil;
+import main.java.UI.AppMain;
+import main.java.UI.UIConstants;
 import org.apache.poi.hssf.usermodel.*;
 import org.apache.poi.hssf.util.HSSFColor;
 
@@ -33,8 +35,6 @@ public class DatabaseManager {
     private DatabaseManager() {
         init();
         initDbData();
-
-        setDevicesData();
     }
 
     public static DatabaseManager getInstance() {
@@ -45,23 +45,14 @@ public class DatabaseManager {
     }
 
     public DbUtil getDbMySQL() {
-        if (dbMySQL == null) {
-            initDbData();
-        }
         return dbMySQL;
     }
 
     public Vector<String> getDbHeads() {
-        if (dbHeads == null) {
-            initDbData();
-        }
         return dbHeads;
     }
 
     public Vector<Vector<Object>> getDbDatas() {
-        if (dbDatas == null) {
-            initDbData();
-        }
         return dbDatas;
     }
 
@@ -79,6 +70,10 @@ public class DatabaseManager {
     private void getDatabaseData() {
         try {
             Connection conn = dbMySQL.getConnection();
+
+            if(resultSet != null) {
+                resultSet = null;
+            }
 
             resultSet = dbMySQL.execQuery("select" +
                     " `参数`.`序号`,`参数`.`用电设备名称`," +
@@ -98,7 +93,7 @@ public class DatabaseManager {
                     "`应急`.`K2`," +
                     "`应急`.`K0`," +
                     "`参数`.`负荷类别`," +
-                    "`参数`.`电机转速/（r/m）` from `参数`," +
+                    "`参数`.`电机转速/(rpm)` from `参数`," +
                     "`航行`,`起锚`," +
                     "`停泊`,`装卸货`," +
                     "`应急` where" +
@@ -113,11 +108,13 @@ public class DatabaseManager {
         }
     }
 
-    private void initDbData() {
+    public void initDbData() {
 
         try {
             getDatabaseData();
             ResultSetMetaData rsmd = resultSet.getMetaData();
+
+            init();
 
             for (int i = 1; i <= rsmd.getColumnCount(); i++) {
                 dbHeads.add(rsmd.getColumnName(i));
@@ -130,6 +127,8 @@ public class DatabaseManager {
                 }
                 dbDatas.add(obj);
             }
+
+            setDevicesData();
 
             dbMySQL.closeConnection();
         } catch (SQLException e) {
@@ -187,7 +186,10 @@ public class DatabaseManager {
     }
 
     public void insertDevice(Device device) {
+
+        devices.add(device);
         try {
+
             Connection conn = dbMySQL.getConnection();
 
             float shaftPower = device.getShaftPower();
@@ -198,7 +200,28 @@ public class DatabaseManager {
             String loadType = device.getLoadType();
             String motorRevSpeed = device.getMotorRevSpeed();
 
+            float[] factorK0 = new float[5];
+            float[] factorK2 = new float[5];
+
             String[] items = new String[7];
+            String[][] factors = new String[5][2];
+
+            for (int i = 0; i < 5; i++) {
+                factorK0[i] = device.getFactorK0(i);
+                factorK2[i] = device.getFactorK2(i);
+
+                if (factorK0[i] == 0.000001f) {
+                    factors[i][0] = "NULL";
+                } else {
+                    factors[i][0] = String.valueOf(factorK0[i]);
+                }
+
+                if (factorK2[i] == 0.000001f) {
+                    factors[i][1] = "NULL";
+                } else {
+                    factors[i][1] = String.valueOf(factorK2[i]);
+                }
+            }
 
             if (shaftPower == 1.000001f) {
                 items[0] = "NULL";
@@ -230,19 +253,20 @@ public class DatabaseManager {
                 items[4] = String.valueOf(devicesPower);
             }
 
-            if (loadType == "") {
+            if (loadType.equals("")) {
                 items[5] = "NULL";
             } else {
                 items[5] = loadType;
             }
 
-            if (motorRevSpeed == "") {
+            if (motorRevSpeed.equals("")) {
                 items[6] = "NULL";
             } else {
-                items[6] = motorRevSpeed;
+                items[6] = "'" + motorRevSpeed + "'";
             }
 
-            int rs = dbMySQL.execUpdate(
+
+            dbMySQL.execUpdate(
                     "INSERT INTO `参数` " +
                             "VALUES(" +
                             "NULL, " +
@@ -254,15 +278,184 @@ public class DatabaseManager {
                             items[3] + ", " +
                             items[4] + ", " +
                             "'" + items[5] + "'," +
-                            "'" + device.getMotorRevSpeed() + "');");
+                            items[6] + ");");
 
-            System.out.println(rs);
+            String[] statusStr = {"航行", "起锚", "停泊", "装卸货", "应急"};
+
+            for (int i = 0; i < 5; i++) {
+                dbMySQL.execUpdate(
+                        "INSERT INTO `" + statusStr[i] + "` " +
+                                "VALUES(" +
+                                "NULL, " +
+                                factors[i][0] + ", " +
+                                factors[i][1] + ");");
+            }
+
+            AppMain.toolBarPanel.getButton("Operator")
+                    .getParent().setBackground(UIConstants.TOOL_BAR_COLOR);
+
+            AppMain.toolBarPanel.getButton("Database")
+                    .getParent().setBackground(UIConstants.TOOL_BAR_ACTIVATED_COLOR);
+
+            AppMain.toolBarPanel.setCurActivatedBtn(AppMain.toolBarPanel.getButton("Database"));
+
+            AppMain app = AppMain.getInstance();
+            AppMain.dbPanel.refreshTable();
+            app.switchPanel(AppMain.dbPanel);
+
         } catch (SQLException e) {
             e.printStackTrace();
         }
     }
 
-    public void updateDevice() {
+
+    public void updateDevice(Device device, int row) {
+
+        try {
+
+            Connection conn = dbMySQL.getConnection();
+
+            float shaftPower = device.getShaftPower();
+            float motorPower = device.getMotorPower();
+            float motorEfficiency = device.getMotorEfficiency();
+            float factorK1 = device.getFactorK1();
+            float devicesPower = device.getDevicesPower();
+            String loadType = device.getLoadType();
+            String motorRevSpeed = device.getMotorRevSpeed();
+
+            float[] factorK0 = new float[5];
+            float[] factorK2 = new float[5];
+
+            String[] items = new String[7];
+            String[][] factors = new String[5][2];
+
+            for (int i = 0; i < 5; i++) {
+                factorK0[i] = device.getFactorK0(i);
+                factorK2[i] = device.getFactorK2(i);
+
+                if (factorK0[i] == 0.000001f) {
+                    factors[i][0] = "NULL";
+                } else {
+                    factors[i][0] = String.valueOf(factorK0[i]);
+                }
+
+                if (factorK2[i] == 0.000001f) {
+                    factors[i][1] = "NULL";
+                } else {
+                    factors[i][1] = String.valueOf(factorK2[i]);
+                }
+            }
+
+            if (shaftPower == 1.000001f) {
+                items[0] = "NULL";
+            } else {
+                items[0] = String.valueOf(shaftPower);
+            }
+
+            if (motorPower == 1.000001f) {
+                items[1] = "NULL";
+            } else {
+                items[1] = String.valueOf(motorPower);
+            }
+
+            if (motorEfficiency == 100.000001f) {
+                items[2] = "NULL";
+            } else {
+                items[2] = String.valueOf(motorEfficiency);
+            }
+
+            if (factorK1 == 1.000001f) {
+                items[3] = "NULL";
+            } else {
+                items[3] = String.valueOf(factorK1);
+            }
+
+            if (devicesPower == 1.000001f) {
+                items[4] = "NULL";
+            } else {
+                items[4] = String.valueOf(devicesPower);
+            }
+
+            if (loadType.equals("")) {
+                items[5] = "NULL";
+            } else {
+                items[5] = loadType;
+            }
+
+            if (motorRevSpeed.equals("")) {
+                items[6] = "NULL";
+            } else {
+                items[6] = "'" + motorRevSpeed + "'";
+            }
+
+
+            dbMySQL.execUpdate(
+                    "UPDATE `参数` " +
+                            "SET " +
+                            "`用电设备名称` = '" + device.getDeviceName() + "', " +
+                            "`数量` = " + device.getNumber() + ", " +
+                            "`机械轴功率/kW` = " + items[0] + ", " +
+                            "`电机功率/kW` = " + items[1] + ", " +
+                            "`电机效率/%` = " + items[2] + ", " +
+                            "`利用系数K1` = " + items[3] + ", " +
+                            "`设备总功率/kW` = " + items[4] + ", " +
+                            "`负荷类别` = '" + items[5] + "', " +
+                            "`电机转速/(rpm)` = " + items[6] + " " +
+                            "WHERE " +
+                            "`序号` = " + row + ";");
+
+            String[] statusStr = {"航行", "起锚", "停泊", "装卸货", "应急"};
+
+            for (int i = 0; i < 5; i++) {
+                dbMySQL.execUpdate(
+                        "UPDATE `" + statusStr[i] + "` " +
+                                "SET " +
+                                "`K2` = " + factors[i][0] + ", " +
+                                "`K0` = " + factors[i][1] + " " +
+                                "WHERE " +
+                                "`序号` = " + row + ";");
+            }
+
+            AppMain.toolBarPanel.getButton("Operator")
+                    .getParent().setBackground(UIConstants.TOOL_BAR_COLOR);
+
+            AppMain.toolBarPanel.getButton("Database")
+                    .getParent().setBackground(UIConstants.TOOL_BAR_ACTIVATED_COLOR);
+
+            AppMain.toolBarPanel.setCurActivatedBtn(AppMain.toolBarPanel.getButton("Database"));
+
+            AppMain app = AppMain.getInstance();
+            AppMain.dbPanel.refreshTable();
+            app.switchPanel(AppMain.dbPanel);
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void deleteDevice(int row) {
+
+        try {
+
+            Connection conn = dbMySQL.getConnection();
+
+            dbMySQL.execUpdate("DELETE FROM `参数` WHERE `序号` = " + row);
+            String[] statusStr = {"航行", "起锚", "停泊", "装卸货", "应急"};
+
+            for (int i = 0; i < 5; i++) {
+                dbMySQL.execUpdate("DELETE FROM `" + statusStr[i] + "` " +
+                        " WHERE `序号` = " + row);
+            }
+
+            DatabaseManager.getInstance().devices.remove(row);
+
+            AppMain app = AppMain.getInstance();
+            AppMain.dbPanel.refreshTable();
+            app.switchPanel(AppMain.dbPanel);
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
 
     }
 

@@ -20,8 +20,8 @@ public class IconButton extends JButton {
         this.setFocusable(true);
         this.setMargin(new Insets(5, 0, 5, 0));
         this.setText(text);
-        this.setFont(new Font("font", Font.BOLD, 16));
-        this.setForeground(Color.WHITE);
+        this.setFont(new Font("font", Font.PLAIN, 17));
+        this.setForeground(new Color(55, 61, 45));
 
 //        this.setRolloverIcon(iconActivated);
 //        this.setPressedIcon(iconActivated);
